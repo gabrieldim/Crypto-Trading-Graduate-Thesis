@@ -26,10 +26,15 @@ public class RegisterController {
                            @RequestParam String repeatPassword,
                            @RequestParam String firstName,
                            @RequestParam String lastName,
-                           @RequestParam Role role)
+                           @RequestParam String role)
             throws UserAlreadyExsistsException, InvalidUserPasswordsException, InvalidUserCredentialsException {
+        System.out.println("test");
+        Role role1 = Role.ROLE_USER;
 
-        this.userService.register(username, password, repeatPassword, firstName, lastName, role);
+        if(role.equals("ROLE_ADMIN")){
+             role1 = Role.ROLE_ADMIN;
+        }
+        this.userService.register(username, password, repeatPassword, firstName, lastName, role1);
 
     }
 

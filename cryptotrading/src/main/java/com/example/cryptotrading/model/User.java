@@ -24,7 +24,8 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    private Long embg;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String firstName;
 
