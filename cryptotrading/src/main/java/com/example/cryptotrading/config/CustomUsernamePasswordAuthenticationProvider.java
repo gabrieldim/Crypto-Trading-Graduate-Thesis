@@ -43,6 +43,6 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return  true; //;authentication.equals(UsernamePasswordAuthenticationToken.class);
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
