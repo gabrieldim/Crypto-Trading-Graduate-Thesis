@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -27,6 +26,10 @@ public class CryptoInWallet {
     private Double currencyHeldAmount;
 
     @ManyToMany
-    private List<User> user;
+    Set<User> user;
 
+    public CryptoInWallet(String currencyHeldName, Double currencyHeldAmount) {
+        this.currencyHeldName = currencyHeldName;
+        this.currencyHeldAmount = currencyHeldAmount;
+    }
 }
