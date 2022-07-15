@@ -36,8 +36,9 @@ public class UserServiceImplementation implements UserService {
         if(this.userRepository.findByUsername(username) != null ){
             throw new UserAlreadyExsistsException("Please provide same passwords!");
         }
+        String encodedPassword = passwordEncoder.encode(password);
 
-        User user = new User(username, password, firstName, lastName, role);
+        User user = new User(username, encodedPassword, firstName, lastName, role);
         return userRepository.save(user);
     }
 
