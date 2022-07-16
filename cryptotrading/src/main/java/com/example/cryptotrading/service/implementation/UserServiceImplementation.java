@@ -95,7 +95,8 @@ public class UserServiceImplementation implements UserService {
      * @throws NotEnoughAppResourcesException
      * @throws NotEnoughUserResourcesException
      */
-    public void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+    public void buyCrypto(String currencyName, Double amountToBuy)
+            throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
 
         //proveri dali aplikaciajta ima pari vo taa valuta
         AvailableAppCrypto availableAppCrypto = availableAppCryptoRepository.findByAppCurrencyHeldName(currencyName);
@@ -174,7 +175,8 @@ public class UserServiceImplementation implements UserService {
      * @param amountToSell - - amount that the user wants to sell, in USD.
      * @throws NotEnoughUserResourcesException
      */
-    public void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+    public void sellCrypto(String currencyName, Double amountToSell)
+            throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
         // zemi ja cenata po koja shto valutata se prodava
         RestTemplate restTemplate = new RestTemplate();
         //https://pro.coinmarketcap.com/account
