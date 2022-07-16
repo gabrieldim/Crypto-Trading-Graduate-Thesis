@@ -4,10 +4,12 @@ import com.example.cryptotrading.dto.jsonparser.APIResponseCryptocurrencies;
 import com.example.cryptotrading.exceptions.*;
 import com.example.cryptotrading.model.AvailableAppCrypto;
 import com.example.cryptotrading.model.CryptoInWallet;
+import com.example.cryptotrading.model.Transaction;
 import com.example.cryptotrading.model.User;
 import com.example.cryptotrading.model.enumeration.Role;
 import com.example.cryptotrading.repository.AvailableAppCryptoRepository;
 import com.example.cryptotrading.repository.CryptoInWalletRepository;
+import com.example.cryptotrading.repository.TransactionRepository;
 import com.example.cryptotrading.repository.UserRepository;
 import com.example.cryptotrading.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class UserServiceImplementation implements UserService {
 
@@ -24,15 +28,17 @@ public class UserServiceImplementation implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final CryptoInWalletRepository cryptoInWalletRepository;
     private final AvailableAppCryptoRepository availableAppCryptoRepository;
+    private final TransactionRepository transactionRepository;
 
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                      CryptoInWalletRepository cryptoInWalletRepository,
-                                     AvailableAppCryptoRepository availableAppCryptoRepository) {
+                                     AvailableAppCryptoRepository availableAppCryptoRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.cryptoInWalletRepository = cryptoInWalletRepository;
         this.availableAppCryptoRepository = availableAppCryptoRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @Override
@@ -121,9 +127,13 @@ public class UserServiceImplementation implements UserService {
         Double newAppAmount = currentAppAmount - (amountToBuy/currentCryptocurrencyPrice);
         availableAppCrypto.setAppCurrencyHeldAmount(newAppAmount);
 
+        //zachuvaj ja transakcijata
+        Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToBuy);
+
         //zachuvaj se vo baza
-        availableAppCryptoRepository.save(availableAppCrypto);
         userRepository.save(user);
+        transactionRepository.save(transaction);
+        availableAppCryptoRepository.save(availableAppCrypto);
     }
 
     public void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException {
@@ -158,9 +168,13 @@ public class UserServiceImplementation implements UserService {
                 AvailableAppCrypto availableAppCrypto = availableAppCryptoRepository.findByAppCurrencyHeldName(currencyName);
                 availableAppCrypto.setAppCurrencyHeldAmount(availableAppCrypto.getAppCurrencyHeldAmount() + amountToSell);
 
+                //zachuvaj ja transakcijata
+                Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToSell);
+
                 //zachuvaj u baza
                 userRepository.save(user);
                 availableAppCryptoRepository.save(availableAppCrypto);
+                transactionRepository.save(transaction);
                 break;
             }
         }

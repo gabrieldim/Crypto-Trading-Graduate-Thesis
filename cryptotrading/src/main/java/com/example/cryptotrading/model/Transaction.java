@@ -23,8 +23,15 @@ public class Transaction {
 
     private LocalDate date;
 
+    private String tradedCryptoName;
+
     private Double amount;
 
     @OneToOne
     private AvailableAppCrypto availableAppCrypto;
+    public Transaction(LocalDate date, String tradedCryptoName, Double amount) {
+        this.date = date;
+        this.tradedCryptoName = tradedCryptoName;
+        this.amount = amount;
+    }
 }
