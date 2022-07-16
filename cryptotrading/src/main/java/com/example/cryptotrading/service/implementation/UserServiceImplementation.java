@@ -12,13 +12,22 @@ import com.example.cryptotrading.repository.CryptoInWalletRepository;
 import com.example.cryptotrading.repository.TransactionRepository;
 import com.example.cryptotrading.repository.UserRepository;
 import com.example.cryptotrading.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 
 @Service
@@ -78,7 +87,15 @@ public class UserServiceImplementation implements UserService {
         userRepository.save(user);
     }
 
-    public void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException {
+    /**
+     *
+     * @param currencyName
+     * @param amountToBuy - amount that the user wants to buy, in USD.
+     *
+     * @throws NotEnoughAppResourcesException
+     * @throws NotEnoughUserResourcesException
+     */
+    public void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
 
         //proveri dali aplikaciajta ima pari vo taa valuta
         AvailableAppCrypto availableAppCrypto = availableAppCryptoRepository.findByAppCurrencyHeldName(currencyName);
@@ -95,11 +112,26 @@ public class UserServiceImplementation implements UserService {
 
 
         //proveri po kolku pari se prodava taa valuta
-        APIResponseCryptocurrencies apiResponseCryptocurrencies = new APIResponseCryptocurrencies();
+        RestTemplate restTemplate = new RestTemplate();
+        //https://pro.coinmarketcap.com/account
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-CMC_PRO_API_KEY","d547fd3a-f9a6-4fdd-9dd0-71774b4cdcd5");
+
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        final String baseUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+        URI uri = new URI(baseUrl);
+
+        String JSON = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class).getBody();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        APIResponseCryptocurrencies cryptocurrencyList = objectMapper.readValue(JSON, APIResponseCryptocurrencies.class);
+
         Double currentCryptocurrencyPrice = 0.0;
-        for(int i=0;i<apiResponseCryptocurrencies.getCryptocurrencyList().size(); i++){
-            if(apiResponseCryptocurrencies.getCryptocurrencyList().get(i).getName().equals(currencyName)){
-                currentCryptocurrencyPrice = apiResponseCryptocurrencies.getCryptocurrencyList()
+        for(int i=0;i<cryptocurrencyList.getCryptocurrencyList().size(); i++){
+            if(cryptocurrencyList.getCryptocurrencyList().get(i).getName().equals(currencyName)){
+                currentCryptocurrencyPrice = cryptocurrencyList.getCryptocurrencyList()
                                                         .get(i).getQuote().getUsd().getPrice();
             }
         }
@@ -129,20 +161,41 @@ public class UserServiceImplementation implements UserService {
 
         //zachuvaj ja transakcijata
         Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToBuy);
-
+        transaction.setUser(user);
         //zachuvaj se vo baza
         userRepository.save(user);
         transactionRepository.save(transaction);
         availableAppCryptoRepository.save(availableAppCrypto);
     }
 
-    public void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException {
+    /**
+     *
+     * @param currencyName
+     * @param amountToSell - - amount that the user wants to sell, in USD.
+     * @throws NotEnoughUserResourcesException
+     */
+    public void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
         // zemi ja cenata po koja shto valutata se prodava
-        APIResponseCryptocurrencies apiResponseCryptocurrencies = new APIResponseCryptocurrencies();
+        RestTemplate restTemplate = new RestTemplate();
+        //https://pro.coinmarketcap.com/account
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-CMC_PRO_API_KEY","d547fd3a-f9a6-4fdd-9dd0-71774b4cdcd5");
+
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        final String baseUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+        URI uri = new URI(baseUrl);
+
+        String JSON = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class).getBody();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        APIResponseCryptocurrencies cryptocurrencyList = objectMapper.readValue(JSON, APIResponseCryptocurrencies.class);
+
         Double currentCryptocurrencyPrice = 0.0;
-        for(int i=0;i<apiResponseCryptocurrencies.getCryptocurrencyList().size(); i++){
-            if(apiResponseCryptocurrencies.getCryptocurrencyList().get(i).getName().equals(currencyName)){
-                currentCryptocurrencyPrice = apiResponseCryptocurrencies.getCryptocurrencyList()
+        for(int i=0;i<cryptocurrencyList.getCryptocurrencyList().size(); i++){
+            if(cryptocurrencyList.getCryptocurrencyList().get(i).getName().equals(currencyName)){
+                currentCryptocurrencyPrice = cryptocurrencyList.getCryptocurrencyList()
                         .get(i).getQuote().getUsd().getPrice();
             }
         }
@@ -170,7 +223,7 @@ public class UserServiceImplementation implements UserService {
 
                 //zachuvaj ja transakcijata
                 Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToSell);
-
+                transaction.setUser(user);
                 //zachuvaj u baza
                 userRepository.save(user);
                 availableAppCryptoRepository.save(availableAppCrypto);

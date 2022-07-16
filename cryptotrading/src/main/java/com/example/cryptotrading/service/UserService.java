@@ -3,8 +3,11 @@ package com.example.cryptotrading.service;
 import com.example.cryptotrading.exceptions.*;
 import com.example.cryptotrading.model.User;
 import com.example.cryptotrading.model.enumeration.Role;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import java.net.URISyntaxException;
 
 @Service
 public interface UserService extends UserDetailsService {
@@ -13,7 +16,7 @@ public interface UserService extends UserDetailsService {
 
     void addUSDMoneyInWallet(Double deposit);
 
-    void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException;
+    void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException;
 
-    void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException;
+    void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException;
 }

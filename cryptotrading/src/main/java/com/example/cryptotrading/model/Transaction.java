@@ -27,6 +27,9 @@ public class Transaction {
 
     private Double amount;
 
+    @ManyToOne
+    private User user;
+
     @OneToOne
     private AvailableAppCrypto availableAppCrypto;
     public Transaction(LocalDate date, String tradedCryptoName, Double amount) {

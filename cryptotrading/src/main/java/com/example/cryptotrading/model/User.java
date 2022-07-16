@@ -56,7 +56,7 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<CryptoInWallet> cryptoInWallet;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "user")
     List<Transaction> transaction;
 
     public User(String username, String password, String firstName, String lastName, Role role) {
