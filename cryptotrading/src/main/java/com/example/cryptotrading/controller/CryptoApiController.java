@@ -1,6 +1,8 @@
 package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.dto.jsonparser.APIResponseCryptocurrencies;
+import com.example.cryptotrading.repository.CryptoHistoryGraphDataRepository;
+import com.example.cryptotrading.service.CryptoHistoryGraphDataService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +20,12 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping("/api")
 public class CryptoApiController {
+
+
+    private final CryptoHistoryGraphDataService cryptoHistoryGraphDataService;
+    public CryptoApiController(CryptoHistoryGraphDataService cryptoHistoryGraphDataService) {
+        this.cryptoHistoryGraphDataService = cryptoHistoryGraphDataService;
+    }
 
     @GetMapping("/crypto")
     public APIResponseCryptocurrencies getCrypto() throws URISyntaxException, JsonProcessingException {
@@ -37,7 +45,11 @@ public class CryptoApiController {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
         APIResponseCryptocurrencies cryptocurrencyList = objectMapper.readValue(JSON, APIResponseCryptocurrencies.class);
-        cryptocurrencyList.getCryptocurrencyList().forEach(System.out::println);
+        //cryptocurrencyList.getCryptocurrencyList().forEach(System.out::println);
+
+        //zachuvaj go i vo tabelata na istorija
+        cryptoHistoryGraphDataService.saveCryptoFromAPI(cryptocurrencyList);
+
         return cryptocurrencyList;
     }
 }
