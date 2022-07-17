@@ -39,7 +39,7 @@ public class UserServiceImplementation implements UserService {
     private final AvailableAppCryptoRepository availableAppCryptoRepository;
     private final TransactionRepository transactionRepository;
 
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
     public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder,
                                      CryptoInWalletRepository cryptoInWalletRepository,
                                      AvailableAppCryptoRepository availableAppCryptoRepository, TransactionRepository transactionRepository) {
@@ -76,6 +76,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void addUSDMoneyInWallet(Double deposit) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUserUsername = auth.getPrincipal().toString();
 
         User user = userRepository.findByUsername(loggedUserUsername);
@@ -105,6 +106,7 @@ public class UserServiceImplementation implements UserService {
         }
 
         //proveri dali korisnikot ima dovolno pari
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUserUsername = auth.getPrincipal().toString();
         User user = userRepository.findByUsername(loggedUserUsername);
         if(user.getAvailableResourcesInUSD()<amountToBuy){
@@ -203,6 +205,7 @@ public class UserServiceImplementation implements UserService {
         }
 
         // zemi pari od korisnikot po cena na prodazhba
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUserUsername = auth.getPrincipal().toString();
         User user = userRepository.findByUsername(loggedUserUsername);
         for(int i=0;i<user.getCryptoInWallet().size(); i++){
