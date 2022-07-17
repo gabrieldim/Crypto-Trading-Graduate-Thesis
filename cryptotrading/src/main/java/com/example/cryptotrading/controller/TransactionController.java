@@ -3,6 +3,8 @@ package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.model.Transaction;
 import com.example.cryptotrading.service.TransactionService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +21,22 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
+    /**
+     * Method that retrieve all transactions in this application.
+     *
+     * @return
+     */
     @GetMapping("/transactions")
-    public List<Transaction> getAllTransactions(){
+    public ResponseEntity<?> getAllTransactions(){
         List<Transaction> transactions = transactionService.getAllTransactions();
 
-        transactions.forEach(System.out::println);
+        if(transactions.size()==0){
+            return new ResponseEntity<>(
+                    "Sorry, currently you don't have permissions for this action or there are no transactions!",
+                    HttpStatus.BAD_REQUEST);
+        }
 
-        return transactions;
+        return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
     }
 
 }
