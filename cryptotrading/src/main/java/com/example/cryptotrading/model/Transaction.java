@@ -26,7 +26,9 @@ public class Transaction {
 
     private String tradedCryptoName;
 
-    private Double amount;
+    private Double amountInUsd;
+
+    private Double amountInCrypto;
 
     @JsonIgnore
     @ManyToOne
@@ -34,9 +36,9 @@ public class Transaction {
 
     @OneToOne
     private AvailableAppCrypto availableAppCrypto;
-    public Transaction(LocalDate date, String tradedCryptoName, Double amount) {
+    public Transaction(LocalDate date, String tradedCryptoName, Double amountInUsd) {
         this.date = date;
         this.tradedCryptoName = tradedCryptoName;
-        this.amount = amount;
+        this.amountInUsd = amountInUsd;
     }
 }

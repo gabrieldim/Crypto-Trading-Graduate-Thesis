@@ -165,6 +165,8 @@ public class UserServiceImplementation implements UserService {
         //zachuvaj ja transakcijata
         Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToBuy);
         transaction.setUser(user);
+        transaction.setAvailableAppCrypto(availableAppCrypto);
+        transaction.setAmountInCrypto(amountToBuy/currentCryptocurrencyPrice);
         //zachuvaj se vo baza
         userRepository.save(user);
         transactionRepository.save(transaction);
@@ -201,6 +203,7 @@ public class UserServiceImplementation implements UserService {
             if(cryptocurrencyList.getCryptocurrencyList().get(i).getName().equals(currencyName)){
                 currentCryptocurrencyPrice = cryptocurrencyList.getCryptocurrencyList()
                         .get(i).getQuote().getUsd().getPrice();
+                break;
             }
         }
 
@@ -216,11 +219,11 @@ public class UserServiceImplementation implements UserService {
                     throw new NotEnoughUserResourcesException("You don't have that much crypto to sell!");
                 }
 
-                currentAvailableAmountCrypto = currentAvailableAmountCrypto - (amountToSell/currentCryptocurrencyPrice);
+                currentAvailableAmountCrypto = currentAvailableAmountCrypto - amountToSell;
                 user.getCryptoInWallet().get(i).setCurrencyHeldAmount(currentAvailableAmountCrypto);
 
                 // dodaj mu pari vo cena na dostapni resursi vo USD
-                user.setAvailableResourcesInUSD(user.getAvailableResourcesInUSD() + amountToSell*currentCryptocurrencyPrice);
+                user.setAvailableResourcesInUSD(user.getAvailableResourcesInUSD() + amountToSell);
 
                 // dodaj ja valutata na aplikacijata
                 AvailableAppCrypto availableAppCrypto = availableAppCryptoRepository.findByAppCurrencyHeldName(currencyName);
@@ -229,6 +232,8 @@ public class UserServiceImplementation implements UserService {
                 //zachuvaj ja transakcijata
                 Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToSell);
                 transaction.setUser(user);
+                transaction.setAvailableAppCrypto(availableAppCrypto);
+                transaction.setAmountInCrypto(amountToSell/currentCryptocurrencyPrice);
                 //zachuvaj u baza
                 userRepository.save(user);
                 availableAppCryptoRepository.save(availableAppCrypto);
