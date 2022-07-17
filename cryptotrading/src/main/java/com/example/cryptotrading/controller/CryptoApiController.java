@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 public class CryptoApiController {
 
     @GetMapping("/crypto")
-    public void getCrypto() throws URISyntaxException, JsonProcessingException {
+    public APIResponseCryptocurrencies getCrypto() throws URISyntaxException, JsonProcessingException {
 
         RestTemplate restTemplate = new RestTemplate();
         //https://pro.coinmarketcap.com/account
@@ -38,5 +38,6 @@ public class CryptoApiController {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
         APIResponseCryptocurrencies cryptocurrencyList = objectMapper.readValue(JSON, APIResponseCryptocurrencies.class);
         cryptocurrencyList.getCryptocurrencyList().forEach(System.out::println);
+        return cryptocurrencyList;
     }
 }
