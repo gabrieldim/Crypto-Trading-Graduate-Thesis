@@ -145,21 +145,25 @@ public class UserServiceImplementation implements UserService {
             if(user.getCryptoInWallet().get(i).getCurrencyHeldName().equals(currencyName)){
                 Double currentCryptoOwnedAmount = user.getCryptoInWallet().get(i).getCurrencyHeldAmount();
 
-                currentCryptoOwnedAmount += amountToBuy/currentCryptocurrencyPrice;
+                currentCryptoOwnedAmount += amountToBuy;
 
                 user.getCryptoInWallet().get(i).setCurrencyHeldAmount(currentCryptoOwnedAmount);
                 ownedCheck = 1;
             }
         }
         if(ownedCheck == 0){ // ako korisnikot ne ja poseduval taa valuta
-            CryptoInWallet cryptoInWallet = new CryptoInWallet(currencyName, amountToBuy/currentCryptocurrencyPrice);
+            CryptoInWallet cryptoInWallet = new CryptoInWallet(currencyName, amountToBuy);
             user.getCryptoInWallet().add(cryptoInWallet);
         }
+
+        //namali raspolozhivi pari na smetkata kaj korisnikot vo USD
+        Double newAmountOfAvailableResourcesInUSD = user.getAvailableResourcesInUSD() - amountToBuy;
+        user.setAvailableResourcesInUSD(newAmountOfAvailableResourcesInUSD);
 
 
         //namali valuta na aplikacijata
         Double currentAppAmount = availableAppCrypto.getAppCurrencyHeldAmount();
-        Double newAppAmount = currentAppAmount - (amountToBuy/currentCryptocurrencyPrice);
+        Double newAppAmount = currentAppAmount - amountToBuy;
         availableAppCrypto.setAppCurrencyHeldAmount(newAppAmount);
 
         //zachuvaj ja transakcijata
