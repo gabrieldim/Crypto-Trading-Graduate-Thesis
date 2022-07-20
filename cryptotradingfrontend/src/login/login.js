@@ -21,15 +21,15 @@ const Login = (props) => {
         e.preventDefault();
         CryptoService.login(formData.username, formData.password).then(resp => {
             localStorage.setItem("JWT", resp.data);
-            props.onLogin()
-            history.push("/home");
+            history("/home");
         })
 
     }
 
     return (
-        <div className="row mt-5">
+        <div className="row mt-5 login-form">
             <div className="col-md-5">
+            <h2>Login Form</h2> 
                 <form onSubmit={onFormSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Username</label>

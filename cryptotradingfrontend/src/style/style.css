@@ -1,0 +1,22 @@
+/* .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;  
+    margin-top: -15%;
+    background-color: darkcyan;
+} */
+
+.space {
+    margin-top: 10px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    height: 100%;
+    color: aliceblue;
+    font-size: x-large;
+}

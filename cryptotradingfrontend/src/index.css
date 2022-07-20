@@ -1,0 +1,9 @@
+body, html {
+background-image: url(/src/images/bgPhoto.jpg);
+text-align: center;
+position: fixed;
+min-width: 100%;
+min-height: 100%;
+background-size: cover;
+background-position: center;
+}
