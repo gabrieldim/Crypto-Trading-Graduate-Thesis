@@ -5,13 +5,11 @@ import com.example.cryptotrading.exceptions.InvalidUserPasswordsException;
 import com.example.cryptotrading.exceptions.UserAlreadyExsistsException;
 import com.example.cryptotrading.model.enumeration.Role;
 import com.example.cryptotrading.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/register")
+@CrossOrigin(value = "*")
 public class RegisterController {
 
     private final UserService userService;
@@ -28,7 +26,7 @@ public class RegisterController {
                            @RequestParam String lastName,
                            @RequestParam Role role)
             throws UserAlreadyExsistsException, InvalidUserPasswordsException, InvalidUserCredentialsException {
-
+        System.out.println("test");
         this.userService.register(username, password, repeatPassword, firstName, lastName, role);
 
     }
