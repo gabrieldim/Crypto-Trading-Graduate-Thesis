@@ -1,8 +1,9 @@
 package com.example.cryptotrading.service.implementation;
 
 import com.example.cryptotrading.model.Transaction;
-import com.example.cryptotrading.model.enumeration.Role;
+import com.example.cryptotrading.model.User;
 import com.example.cryptotrading.repository.TransactionRepository;
+import com.example.cryptotrading.repository.UserRepository;
 import com.example.cryptotrading.service.TransactionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +16,11 @@ import java.util.List;
 public class TransactionServiceImplementation implements TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
 
-    public TransactionServiceImplementation(TransactionRepository transactionRepository) {
+    public TransactionServiceImplementation(TransactionRepository transactionRepository, UserRepository userRepository) {
         this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -30,4 +33,11 @@ public class TransactionServiceImplementation implements TransactionService {
 
         return transactionRepository.findAll();
     }
+
+    @Override
+    public List<Transaction> getAllTransactionByUsername(String user) {
+        User loggedUser = userRepository.findByUsername(user);
+        return transactionRepository.getTransactionByUser(loggedUser);
+    }
+
 }
