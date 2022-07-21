@@ -1,7 +1,6 @@
 package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.dto.jsonparser.APIResponseCryptocurrencies;
-import com.example.cryptotrading.repository.CryptoHistoryGraphDataRepository;
 import com.example.cryptotrading.service.CryptoHistoryGraphDataService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value = "*")
 public class CryptoApiController {
 
 
