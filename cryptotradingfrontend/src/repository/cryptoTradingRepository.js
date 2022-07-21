@@ -17,6 +17,9 @@ const cryptoTradingRepository = {
             "lastName" : lastName,
             "role" : role
         });
+    },
+    allCrypto: () => {
+      return axios.get("/api/crypto");
     }
 
 }

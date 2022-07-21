@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Login from './login/login';
 import Register from "./register/register";
-
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Routes>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
-            <Route exact path='/home' element={( <div><h2 style={{color:"red"}}>test</h2></div>)}/>
+            <Route exact path='/home' element={<HomePage/>}/>
         </Routes>
     </BrowserRouter>
   );
