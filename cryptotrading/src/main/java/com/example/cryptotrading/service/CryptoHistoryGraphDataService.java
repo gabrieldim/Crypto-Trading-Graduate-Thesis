@@ -11,5 +11,6 @@ public interface CryptoHistoryGraphDataService {
 
     void saveCryptoFromAPI(APIResponseCryptocurrencies apiResponseCryptocurrencies);
 
+    List<CryptoHistoryGraphData> getHistoricalCryptoData();
     List<CryptoHistoryGraphData> getAllGraphCryptoData();
 }

@@ -39,6 +39,11 @@ public class CryptoHistoryGraphDataServiceImplementation implements CryptoHistor
     }
 
     @Override
+    public List<CryptoHistoryGraphData> getHistoricalCryptoData() {
+        return cryptoHistoryGraphDataRepository.findByOrderByTimeOfThisRecordDesc();
+    }
+
+    @Override
     public List<CryptoHistoryGraphData> getAllGraphCryptoData() {
         return cryptoHistoryGraphDataRepository.findAll();
     }
