@@ -20,7 +20,25 @@ const cryptoTradingRepository = {
     },
     allCrypto: () => {
       return axios.get("/api/crypto");
+    },
+    buyCrypto: (currencyName, amountToBuy) => {
+        return axios.post("/api/buyCrypto", {
+            "currencyName": currencyName,
+            "amountToBuy": amountToBuy
+        });
+    },
+    sellCrypto: (currencyName, amountToSell) => {
+        return axios.post("/api/sellCrypto", {
+            "currencyName": currencyName,
+            "amountToSell": amountToSell
+        });
+    },
+    addMoney: (deposit) => {
+        return axios.post("/api/addMoney", {
+            "deposit": deposit,
+        });
     }
+    
 
 }
 export default cryptoTradingRepository;

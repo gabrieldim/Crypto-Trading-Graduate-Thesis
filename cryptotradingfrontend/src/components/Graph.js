@@ -19,8 +19,9 @@ export default function Graph() {
     }, []);
 
     return(
-        
+        <>
         <NoteTimeline notes={notes}/>
+        </>
     )
     
   }
