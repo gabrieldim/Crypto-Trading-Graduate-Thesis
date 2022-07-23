@@ -2,17 +2,16 @@ package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.exceptions.NotEnoughAppResourcesException;
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
+import com.example.cryptotrading.model.dto.DepositCashDto;
 import com.example.cryptotrading.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value = "*")
 public class UserController {
 
     private final UserService userService;
@@ -22,8 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/addMoney")
-    public void addUSDMoneyInWallet(@RequestParam Double deposit){
-        userService.addUSDMoneyInWallet(deposit);
+    public void addUSDMoneyInWallet(@RequestBody DepositCashDto depositCashDto){
+        System.out.println("Cash to deposit: " + depositCashDto.getDeposit());
+        userService.addUSDMoneyInWallet(Double.valueOf(depositCashDto.getDeposit()));
     }
 
     @PostMapping("/buyCrypto")
