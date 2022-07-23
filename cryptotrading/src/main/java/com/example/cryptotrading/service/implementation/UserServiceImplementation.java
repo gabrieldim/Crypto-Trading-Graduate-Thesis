@@ -29,6 +29,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -145,7 +146,7 @@ public class UserServiceImplementation implements UserService {
         availableAppCrypto.setAppCurrencyHeldAmount(newAppAmount);
 
         //zachuvaj ja transakcijata
-        Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToBuy);
+        Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToBuy);
         transaction.setUser(user);
         transaction.setAvailableAppCrypto(availableAppCrypto);
         transaction.setAmountInCrypto(amountToBuy/currentCryptocurrencyPrice);
@@ -189,7 +190,7 @@ public class UserServiceImplementation implements UserService {
                 availableAppCrypto.setAppCurrencyHeldAmount(availableAppCrypto.getAppCurrencyHeldAmount() + amountToSell);
 
                 //zachuvaj ja transakcijata
-                Transaction transaction = new Transaction(LocalDate.now(), currencyName, amountToSell);
+                Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToSell);
                 transaction.setUser(user);
                 transaction.setAvailableAppCrypto(availableAppCrypto);
                 transaction.setAmountInCrypto(amountToSell/currentCryptocurrencyPrice);

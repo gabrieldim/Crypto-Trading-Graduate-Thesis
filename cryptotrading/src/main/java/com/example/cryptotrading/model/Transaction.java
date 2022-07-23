@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -22,7 +23,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     private String tradedCryptoName;
 
@@ -36,7 +37,7 @@ public class Transaction {
 
     @OneToOne
     private AvailableAppCrypto availableAppCrypto;
-    public Transaction(LocalDate date, String tradedCryptoName, Double amountInUsd) {
+    public Transaction(LocalDateTime date, String tradedCryptoName, Double amountInUsd) {
         this.date = date;
         this.tradedCryptoName = tradedCryptoName;
         this.amountInUsd = amountInUsd;
