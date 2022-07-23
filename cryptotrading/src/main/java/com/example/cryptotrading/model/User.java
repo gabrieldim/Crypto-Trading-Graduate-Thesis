@@ -36,7 +36,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    private Double availableResourcesInUSD;
+    private Double availableResourcesInUSD = 0d;
 
     private String city;
 
