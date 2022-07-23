@@ -13,7 +13,7 @@ export default function CashChanges(){
             <div style={{border:"2px solid black", marginLeft:"50%", marginRight:"2%"}}>
             <h4 style={{marginLeft:"30%"}}>Make Transaction:</h4>
                 <BuyCrypto/>
-                {/* <SellCrypto/> */}
+                <SellCrypto/>
             </div>
 
                 <AddMoneyInWallet/>

@@ -28,6 +28,7 @@ const cryptoTradingRepository = {
         });
     },
     sellCrypto: (currencyName, amountToSell) => {
+        console.log(currencyName + " " + amountToSell)
         return axios.post("/api/sellCrypto", {
             "currencyName": currencyName,
             "amountToSell": amountToSell
