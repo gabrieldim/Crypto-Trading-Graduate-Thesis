@@ -17,15 +17,15 @@ export default function AddMoneyInWallet() {
 
   
     return (
-        <div style={{marginLeft:"26%", marginTop:"10%"}}>
-            <h4 style={{marginTop:"-87%"}}>Deposit Available Resources(USD):</h4>
-            <form style={{marginTop:"1%"}} onSubmit={onFormSubmit} >
+        <div>
+            <h4 style={{marginLeft:"60%"}}>Deposit Available Resources:</h4>
+            <form style={{marginLeft:"52%"}} onSubmit={onFormSubmit} >
                 <label>
-                  Amount:
+                  Amount(USD):
                  <input type="number" name="deposit" onChange={handleChange}/>
                 </label>
                 <br/>
-                <Button type='submit' variant="success" style={{marginTop:"1%"}}>Deposit Cash</Button>
+                <Button type='submit' variant="success" style={{margin:"3%"}}>Deposit Cash</Button>
             </form>
         </div>
       );
