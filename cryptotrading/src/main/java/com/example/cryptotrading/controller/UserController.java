@@ -2,6 +2,7 @@ package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.exceptions.NotEnoughAppResourcesException;
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
+import com.example.cryptotrading.model.dto.BuyCryptoDto;
 import com.example.cryptotrading.model.dto.DepositCashDto;
 import com.example.cryptotrading.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,10 +28,10 @@ public class UserController {
     }
 
     @PostMapping("/buyCrypto")
-    public void buyCrypto(@RequestParam String currencyName,
-                          @RequestParam Double amountToBuy)
+    public void buyCrypto(@RequestBody BuyCryptoDto buyCryptoDto)
             throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
-        userService.buyCrypto(currencyName, amountToBuy);
+        System.out.println("Crypto to buy: " + buyCryptoDto.getCurrencyName() + " - " + buyCryptoDto.getAmountToBuy());
+        userService.buyCrypto(buyCryptoDto.getCurrencyName(), Double.valueOf(buyCryptoDto.getAmountToBuy()));
     }
 
     @PostMapping("/sellCrypto")

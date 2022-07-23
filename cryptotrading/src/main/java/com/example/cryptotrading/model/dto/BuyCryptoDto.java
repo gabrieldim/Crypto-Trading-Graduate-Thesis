@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepositCashDto {
-    private String deposit;
+public class BuyCryptoDto {
+
+    private String currencyName;
+
+    private String amountToBuy;
 }
