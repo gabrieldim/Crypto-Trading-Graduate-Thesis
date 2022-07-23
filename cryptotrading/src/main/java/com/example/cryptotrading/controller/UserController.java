@@ -4,6 +4,7 @@ import com.example.cryptotrading.exceptions.NotEnoughAppResourcesException;
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
 import com.example.cryptotrading.model.dto.BuyCryptoDto;
 import com.example.cryptotrading.model.dto.DepositCashDto;
+import com.example.cryptotrading.model.dto.SellCryptoDto;
 import com.example.cryptotrading.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
@@ -35,9 +36,9 @@ public class UserController {
     }
 
     @PostMapping("/sellCrypto")
-    public void sellCrypto(@RequestParam String currencyName,
-                          @RequestParam Double amountToSell)
+    public void sellCrypto(@RequestBody SellCryptoDto sellCryptoDto)
             throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
-        userService.sellCrypto(currencyName, amountToSell);
+        System.out.println("Crypto to sell: " + sellCryptoDto.getCurrencyName() + " - " + sellCryptoDto.getAmountToSell());
+        userService.sellCrypto(sellCryptoDto.getCurrencyName(), sellCryptoDto.getAmountToSell());
     }
 }
