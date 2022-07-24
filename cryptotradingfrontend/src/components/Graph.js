@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NoteTimeline from "./NoteTimeline";
 import CryptoService from "../repository/cryptoTradingRepository"
 
 export default function Graph() {
@@ -10,7 +9,7 @@ export default function Graph() {
     useEffect( () => {
         CryptoService.allCrypto().then(
             (response) => {
-                const allNotes = response.data.data;
+                const allNotes = response.data;
                 setNotes(allNotes)
             }
         )
@@ -20,7 +19,7 @@ export default function Graph() {
 
     return(
         <>
-        <NoteTimeline notes={notes}/>
+            
         </>
     )
     
