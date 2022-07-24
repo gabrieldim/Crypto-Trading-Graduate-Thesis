@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -47,7 +48,7 @@ public class TransactionController {
     public ResponseEntity<?> getAllTransactionsByUsername(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Transaction> transactions = transactionService.getTransactionByUserOrderByDateDesc(auth.getPrincipal().toString());
+        List<Transaction> transactions = transactionService.getTransactionByUserOrderByDateAsc(auth.getPrincipal().toString());
 
         if(transactions.size()==0){
             return new ResponseEntity<>(
