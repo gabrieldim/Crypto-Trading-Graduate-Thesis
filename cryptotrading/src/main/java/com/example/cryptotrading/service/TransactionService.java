@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface TransactionService {
-    List<Transaction> getAllTransactions();
+    List<Transaction> findByOrderByDateDesc();
 
     List<Transaction> getTransactionByUserOrderByDateDesc(String user);
 }

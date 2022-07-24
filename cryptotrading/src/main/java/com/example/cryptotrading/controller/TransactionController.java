@@ -33,7 +33,7 @@ public class TransactionController {
      */
     @GetMapping("/transactions")
     public ResponseEntity<?> getAllTransactions(){
-        List<Transaction> transactions = transactionService.getAllTransactions();
+        List<Transaction> transactions = transactionService.findByOrderByDateDesc();
 
         if(transactions.size()==0){
             return new ResponseEntity<>(

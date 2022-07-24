@@ -24,14 +24,14 @@ public class TransactionServiceImplementation implements TransactionService {
     }
 
     @Override
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> findByOrderByDateDesc() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(!auth.getAuthorities().toString().equals("[ROLE_ADMIN]")){
             return new ArrayList<>();
         }
 
-        return transactionRepository.findAll();
+        return transactionRepository.findByOrderByDateDesc();
     }
 
     @Override
