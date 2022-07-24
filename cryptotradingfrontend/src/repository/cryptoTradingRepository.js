@@ -24,6 +24,9 @@ const cryptoTradingRepository = {
     allTransactions: () => {
         return axios.get("/api/transactions");
       },
+    loggedUserTransactions: () => { 
+      return axios.get("/api/loggedUserTransactions");
+    },
     buyCrypto: (currencyName, amountToBuy) => {
         return axios.post("/api/buyCrypto", {
             "currencyName": currencyName,
