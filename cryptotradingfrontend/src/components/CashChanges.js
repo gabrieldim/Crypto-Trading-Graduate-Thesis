@@ -7,7 +7,7 @@ export default function CashChanges(){
 
     return(
         <>
-            <div>
+            <div style={{marginTop:"1%"}}>
 
             
             <div style={{border:"2px solid black", marginLeft:"50%", marginRight:"2%"}}>
