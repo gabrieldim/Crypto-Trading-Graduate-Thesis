@@ -29,7 +29,7 @@ const NavBar = () => {
 
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/logout'>Log out</NavBtnLink>
+          <NavBtnLink to='/login'>Log out</NavBtnLink>
         </NavBtn>
       </Nav>
     </>
