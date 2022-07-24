@@ -31,15 +31,18 @@ public class Transaction {
 
     private Double amountInCrypto;
 
+    private String transactionBoughtSold;
+
     @JsonIgnore
     @ManyToOne
     private User user;
 
     @OneToOne
     private AvailableAppCrypto availableAppCrypto;
-    public Transaction(LocalDateTime date, String tradedCryptoName, Double amountInUsd) {
+    public Transaction(LocalDateTime date, String tradedCryptoName, Double amountInUsd, String transactionBoughtSold) {
         this.date = date;
         this.tradedCryptoName = tradedCryptoName;
         this.amountInUsd = amountInUsd;
+        this.transactionBoughtSold = transactionBoughtSold;
     }
 }

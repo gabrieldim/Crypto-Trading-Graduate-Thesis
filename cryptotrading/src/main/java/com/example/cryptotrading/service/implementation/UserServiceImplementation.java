@@ -146,7 +146,7 @@ public class UserServiceImplementation implements UserService {
         availableAppCrypto.setAppCurrencyHeldAmount(newAppAmount);
 
         //zachuvaj ja transakcijata
-        Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToBuy);
+        Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToBuy,"Bought");
         transaction.setUser(user);
         transaction.setAvailableAppCrypto(availableAppCrypto);
         transaction.setAmountInCrypto(amountToBuy/currentCryptocurrencyPrice);
@@ -190,7 +190,7 @@ public class UserServiceImplementation implements UserService {
                 availableAppCrypto.setAppCurrencyHeldAmount(availableAppCrypto.getAppCurrencyHeldAmount() + amountToSell);
 
                 //zachuvaj ja transakcijata
-                Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToSell);
+                Transaction transaction = new Transaction(LocalDateTime.now(), currencyName, amountToSell,"Sold");
                 transaction.setUser(user);
                 transaction.setAvailableAppCrypto(availableAppCrypto);
                 transaction.setAmountInCrypto(amountToSell/currentCryptocurrencyPrice);
