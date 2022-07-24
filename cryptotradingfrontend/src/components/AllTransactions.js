@@ -30,6 +30,7 @@ export default function AllTransactions(){
                         <th style={{color:"purple"}}>Traded Crypto</th>
                         <th style={{color:"purple"}}>Crypto Amount</th>
                         <th style={{color:"purple"}}>Crypto USD</th>
+                        <th style={{color:"purple"}}>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,7 @@ export default function AllTransactions(){
                                 <td>{note.tradedCryptoName}</td>
                                 <td>{note.amountInCrypto}</td>
                                 <td>{note.amountInUsd}</td>
+                                <td>{note.date}</td>
                             </tr>
                         ))}
                 </tbody>
