@@ -21,6 +21,9 @@ const cryptoTradingRepository = {
     allCrypto: () => {
       return axios.get("/api/crypto");
     },
+    allTransactions: () => {
+        return axios.get("/api/transactions");
+      },
     buyCrypto: (currencyName, amountToBuy) => {
         return axios.post("/api/buyCrypto", {
             "currencyName": currencyName,
