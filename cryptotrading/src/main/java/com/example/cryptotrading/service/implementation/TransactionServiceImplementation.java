@@ -35,9 +35,9 @@ public class TransactionServiceImplementation implements TransactionService {
     }
 
     @Override
-    public List<Transaction> getTransactionByUserOrderByDateAsc(String user) {
+    public List<Transaction> getTransactionByUserOrderByDateDesc(String user) {
         User loggedUser = userRepository.findByUsername(user);
-        return transactionRepository.getTransactionByUserOrderByDateAsc(loggedUser);
+        return transactionRepository.getTransactionByUserOrderByDateDesc(loggedUser);
     }
 
 }

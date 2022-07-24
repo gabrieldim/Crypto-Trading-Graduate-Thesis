@@ -48,7 +48,7 @@ public class TransactionController {
     public ResponseEntity<?> getAllTransactionsByUsername(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Transaction> transactions = transactionService.getTransactionByUserOrderByDateAsc(auth.getPrincipal().toString());
+        List<Transaction> transactions = transactionService.getTransactionByUserOrderByDateDesc(auth.getPrincipal().toString());
 
         if(transactions.size()==0){
             return new ResponseEntity<>(
