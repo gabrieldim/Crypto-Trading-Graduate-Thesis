@@ -35,11 +35,11 @@ export default function AllTransactions(){
                 <tbody>
                         
                         {notes.map(note => (
-                            <tr>
-                            <td>{note.id}</td>
-                            <td>{note.tradedCryptoName}</td>
-                            <td>{note.amountInCrypto}</td>
-                            <td>{note.amountInUsd}</td>
+                            <tr key={note.id}>
+                                <td>{note.id}</td>
+                                <td>{note.tradedCryptoName}</td>
+                                <td>{note.amountInCrypto}</td>
+                                <td>{note.amountInUsd}</td>
                             </tr>
                         ))}
                 </tbody>
