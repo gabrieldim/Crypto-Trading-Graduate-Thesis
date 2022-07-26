@@ -10,6 +10,8 @@ import com.example.cryptotrading.model.dto.SellCryptoDto;
 import com.example.cryptotrading.repository.UserRepository;
 import com.example.cryptotrading.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +59,16 @@ public class UserController {
         String loggedUserUsername = auth.getPrincipal().toString();
         User user = userRepository.findByUsername(loggedUserUsername);
         return user.getCryptoInWallet();
+    }
+
+    @GetMapping("/loggedUser")
+    public ResponseEntity<?> getLoggedUserUsername(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUserUsername = auth.getPrincipal().toString();
+        User user = userRepository.findByUsername(loggedUserUsername);
+        return new ResponseEntity<>(
+                user.getUsername(),
+                HttpStatus.OK);
     }
 
 }
