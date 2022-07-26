@@ -44,7 +44,10 @@ const cryptoTradingRepository = {
         return axios.post("/api/addMoney", {
             "deposit": deposit,
         });
-    }
+    },
+    userOwnedCrypto: () => { 
+        return axios.get("/api/getLoggedUserCryptocurrencies");
+      },
     
 
 }
