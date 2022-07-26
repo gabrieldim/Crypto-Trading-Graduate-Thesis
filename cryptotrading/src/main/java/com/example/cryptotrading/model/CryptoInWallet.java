@@ -1,5 +1,6 @@
 package com.example.cryptotrading.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +26,9 @@ public class CryptoInWallet {
 
     private Double currencyHeldAmount;
 
-    @ManyToMany
-    Set<User> user;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
     public CryptoInWallet(String currencyHeldName, Double currencyHeldAmount) {
         this.currencyHeldName = currencyHeldName;

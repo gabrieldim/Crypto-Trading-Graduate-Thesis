@@ -1,6 +1,7 @@
 package com.example.cryptotrading.model;
 
 import com.example.cryptotrading.model.enumeration.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,7 +54,7 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @ManyToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     List<CryptoInWallet> cryptoInWallet;
 
     @OneToMany(mappedBy = "user")

@@ -132,7 +132,8 @@ public class UserServiceImplementation implements UserService {
         }
         if(ownedCheck == 0){ // ako korisnikot ne ja poseduval taa valuta
             CryptoInWallet cryptoInWallet = new CryptoInWallet(currencyName, amountToBuy);
-            user.getCryptoInWallet().add(cryptoInWallet);
+            cryptoInWallet.setUser(user);
+            cryptoInWalletRepository.save(cryptoInWallet);
         }
 
         //namali raspolozhivi pari na smetkata kaj korisnikot vo USD
