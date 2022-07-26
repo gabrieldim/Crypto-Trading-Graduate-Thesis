@@ -5,7 +5,7 @@ import CryptoService from "../repository/cryptoTradingRepository"
 export default function MyCrypto(){
 
     const [notes, setNotes] = useState([]);
-
+    const [user, setUser] = useState("");
 
     useEffect( () => {
         CryptoService.userOwnedCrypto().then(
@@ -18,11 +18,27 @@ export default function MyCrypto(){
         
     }, []);
 
+    useEffect( () => {
+        CryptoService.getLoggedUser().then(
+            (response) => {
+                const loggedUser = response.data;
+                setUser(loggedUser)
+            }
+        )
+        .catch(error => console.error(`Error: ${error}`))
+        
+    }, []);
+
     console.log(notes)
 
     return(
         <div>
             <NavBar/>
+            <div style={{margin:"2%", fontSize:"18px"}}>
+                Current logged user - <b> {user} </b> <br/>
+                Cryptocurrencies owned by the given user:
+            </div>
+
             <div>
             <table className="table table-striped">
                 <thead>

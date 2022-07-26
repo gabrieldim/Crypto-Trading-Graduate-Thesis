@@ -48,7 +48,9 @@ const cryptoTradingRepository = {
     userOwnedCrypto: () => { 
         return axios.get("/api/getLoggedUserCryptocurrencies");
       },
-    
+    getLoggedUser: () => { 
+      return axios.get("/api/loggedUser");
+    },
 
 }
 export default cryptoTradingRepository;
