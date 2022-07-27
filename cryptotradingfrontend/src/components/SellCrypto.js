@@ -24,7 +24,7 @@ export default function SellCrypto() {
 
 
     return (
-      <div style={{marginTop:"3%", marginLeft:"2%"}}>    
+      <div style={{marginLeft:"2%"}}>    
             <form style={{marginTop:"1%", marginLeft:"2%"}} onSubmit={onFormSubmit}>
                 <label>
                   Cryptocurrency Name: 

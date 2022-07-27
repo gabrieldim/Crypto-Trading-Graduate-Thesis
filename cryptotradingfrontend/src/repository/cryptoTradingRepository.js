@@ -51,6 +51,10 @@ const cryptoTradingRepository = {
     getLoggedUser: () => { 
       return axios.get("/api/loggedUser");
     },
-
+    generatePDF: (amount) => { 
+        return axios.post("/api/generatePDF", {
+            "amount": amount,
+        });
+      }
 }
 export default cryptoTradingRepository;
