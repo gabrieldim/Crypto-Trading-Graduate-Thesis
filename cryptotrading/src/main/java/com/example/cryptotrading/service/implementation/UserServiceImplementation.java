@@ -205,6 +205,20 @@ public class UserServiceImplementation implements UserService {
 
     }
 
+    @Override
+    public void withdrawAmount(Integer amountToWithdraw) throws NotEnoughUserResourcesException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUserUsername = auth.getPrincipal().toString();
+        User user = userRepository.findByUsername(loggedUserUsername);
+
+        if(user.getAvailableResourcesInUSD() < amountToWithdraw){
+            throw new NotEnoughUserResourcesException("Sorry, you don't have" + amountToWithdraw + " available resources");
+        }
+
+        user.setAvailableResourcesInUSD(user.getAvailableResourcesInUSD() - amountToWithdraw);
+        userRepository.save(user);
+    }
+
     public Double getCurrencyRealTimePrice(String currencyName) throws JsonProcessingException, URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
         //https://pro.coinmarketcap.com/account

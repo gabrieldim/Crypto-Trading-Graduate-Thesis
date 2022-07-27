@@ -1,7 +1,9 @@
 package com.example.cryptotrading.service.implementation;
 
+import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
 import com.example.cryptotrading.model.User;
 import com.example.cryptotrading.repository.UserRepository;
+import com.example.cryptotrading.service.UserService;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.security.core.Authentication;
@@ -17,11 +19,19 @@ public class PDFGeneratorServiceImpl {
 
     private final UserRepository userRepository;
 
-    public PDFGeneratorServiceImpl(UserRepository userRepository) {
+    private final UserService userService;
+
+    public PDFGeneratorServiceImpl(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-    public void export(HttpServletResponse response) throws IOException {
+    public void export(HttpServletResponse response, Integer amountToWithdraw)
+            throws IOException, NotEnoughUserResourcesException {
+
+        //ako nema tolku pari na available resources, odma frli exception
+        userService.withdrawAmount(amountToWithdraw);
+
         Document document = new Document(PageSize.A4);
 
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -59,7 +69,7 @@ public class PDFGeneratorServiceImpl {
         space.setAlignment(Paragraph.ALIGN_LEFT);
 
         //text
-        Paragraph text = new Paragraph("By submitting this invoice, we confirm that requested amount has been paid to the user's account.\n" +
+        Paragraph text = new Paragraph("By submitting this invoice, we confirm that requested amount of "  + amountToWithdraw + " USD has been paid to the user's account.\n" +
                 "\n" +
                 "According to our policy for the use of this service, if there are any irregularities, they will be accepted only in the next three working days, otherwise it is considered that the funds have successfully reached the user's account.\n" +
                 "\n" +

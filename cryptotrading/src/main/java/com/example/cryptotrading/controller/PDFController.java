@@ -1,11 +1,10 @@
 package com.example.cryptotrading.controller;
 
 
+import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
+import com.example.cryptotrading.model.dto.WithdrawCashDto;
 import com.example.cryptotrading.service.implementation.PDFGeneratorServiceImpl;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,8 +23,9 @@ public class PDFController {
         this.pdfGeneratorService = pdfGeneratorService;
     }
 
-    @GetMapping("/generatePDF")
-    public void generatePDF(HttpServletResponse response) throws IOException {
+    @PostMapping("/generatePDF")
+    public void generatePDF(HttpServletResponse response, @RequestBody WithdrawCashDto withdrawCashDto)
+            throws IOException, NotEnoughUserResourcesException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -34,7 +34,9 @@ public class PDFController {
         String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        this.pdfGeneratorService.export(response);
+        System.out.println("Amount to withdraw: " + withdrawCashDto.getAmount());
+
+        this.pdfGeneratorService.export(response, Integer.parseInt(withdrawCashDto.getAmount()));
     }
 
 
