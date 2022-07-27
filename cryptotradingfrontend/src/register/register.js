@@ -35,9 +35,11 @@ const Register = (props) => {
     }
 
     return (
-        <div className="row mt-5 login-form">
+        <div style={{marginLeft:"35%",marginTop:"1%"}}>
             <div className="col-md-5 center">
-                <h2>Register Form</h2>  
+                <h2>Welcome To Block Trader</h2>
+                <h2 style={{marginLeft:"35%"}}><img src={require('../images/logo.png')} style={{height:"100px"}} alt='logo' /></h2> 
+                <h2>Register Form</h2>    
                 <form onSubmit={onFormSubmit}>
                     <div className="form-group">
                         <label htmlFor="name"><b>Username </b></label>
@@ -94,7 +96,7 @@ const Register = (props) => {
                         <input type="text"
                                className="form-control"
                                name="role"
-                               placeholder="Enter Role"
+                               placeholder="Enter Role - ROLE_ADMIN/USER"
                                required
                                onChange={handleChange}
                         />
@@ -104,7 +106,7 @@ const Register = (props) => {
             </div>
             <div>
                 <hr></hr>
-                Have account? <a href='/login' style={{color:"lightBlue"}}>Sign in here</a>
+               <b> Have account? </b> <a href='/login' style={{color:"lightBlue"}}><b>Sign in here</b></a>
             </div>
         </div>
     )
