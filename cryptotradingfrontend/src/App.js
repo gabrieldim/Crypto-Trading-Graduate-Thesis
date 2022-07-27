@@ -2,7 +2,8 @@ import React from "react";
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 import Login from './login/login';
 import Register from "./register/register";
@@ -15,6 +16,7 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
+            <Route exact path='/' element={<Navigate to ="/register" />}/>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
             <Route exact path='/home' element={<HomePage/>}/>
