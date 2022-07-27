@@ -25,6 +25,8 @@ const Login = (props) => {
         })
 
     }
+    
+    localStorage.removeItem("JWT")
 
     return (
         <div style={{marginLeft:"35%",marginTop:"1%"}}>
