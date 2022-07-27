@@ -27,12 +27,12 @@ const Login = (props) => {
     }
 
     return (
-        <div className="row mt-5 login-form">
+        <div style={{marginLeft:"35%",marginTop:"1%"}}>
             <div className="col-md-5">
             <h2>Login Form</h2> 
                 <form onSubmit={onFormSubmit}>
                     <div className="form-group">
-                        <label htmlFor="name">Username</label>
+                        <label htmlFor="name"><b>Username</b></label>
                         <input type="text"
                                className="form-control"
                                name="username"
@@ -42,7 +42,7 @@ const Login = (props) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="price">Password</label>
+                        <label htmlFor="price"><b>Password</b></label>
                         <input type="password"
                                className="form-control"
                                name="password"
@@ -51,7 +51,9 @@ const Login = (props) => {
                                onChange={handleChange}
                         />
                     </div>
-                    <button id="submit" type="submit" className="btn btn-primary">Submit</button>
+                    <div style={{marginTop:"2%"}}>
+                        <button id="submit" type="submit" className="btn btn-primary">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
