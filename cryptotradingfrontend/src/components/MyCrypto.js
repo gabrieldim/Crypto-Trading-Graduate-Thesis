@@ -44,7 +44,7 @@ export default function MyCrypto(){
                 <thead>
                     <tr>
                         <th style={{color:"purple"}}>Currency Name</th>
-                        <th style={{color:"purple"}}>Currency Amount</th>
+                        <th style={{color:"purple"}}>Currency Amount USD</th>
                     </tr>
                 </thead>
                 <tbody>
