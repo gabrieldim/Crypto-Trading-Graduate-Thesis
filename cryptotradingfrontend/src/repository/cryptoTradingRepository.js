@@ -55,6 +55,9 @@ const cryptoTradingRepository = {
         return axios.post("/api/generatePDF", {
             "amount": amount,
         });
-      }
+      },
+    allCryptoSymbols: () => {
+      return axios.get("/api/cryptoSymbolName");
+    },
 }
 export default cryptoTradingRepository;
