@@ -37,7 +37,7 @@ public class TransactionController {
 
         if(transactions.size()==0){
             return new ResponseEntity<>(
-                    "Sorry, currently you don't have permissions for this action or there are no transactions!",
+                    "Sorry, no transactions to show!",
                     HttpStatus.BAD_REQUEST);
         }
 
