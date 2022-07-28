@@ -29,7 +29,6 @@ export default function MyCrypto(){
         
     }, []);
 
-    console.log(notes)
 
     return(
         <div>

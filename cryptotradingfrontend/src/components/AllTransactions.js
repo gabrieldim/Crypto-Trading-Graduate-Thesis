@@ -5,7 +5,7 @@ import CryptoService from "../repository/cryptoTradingRepository"
 export default function AllTransactions(){
 
     const [notes, setNotes] = useState([]);
-
+    const [error, setErrors] = useState([]);
 
     useEffect( () => {
         CryptoService.allTransactions().then(
@@ -14,8 +14,9 @@ export default function AllTransactions(){
                 setNotes(allNotes)
             }
         )
-        .catch(error => console.error(`Error: ${error}`))
-        
+        .catch(error => {
+            setErrors("Sorry, currently you don't have permissions for this action or there are no transactions!");
+          });
     }, []);
 
     return(
@@ -49,6 +50,7 @@ export default function AllTransactions(){
                 </tbody>
             </table>
         </div>
+        <div style={{color:"red", marginLeft:"400px"}}><b>{error}</b></div>
         </div>
     )
 
