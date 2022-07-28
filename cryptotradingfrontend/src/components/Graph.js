@@ -11,12 +11,13 @@ export default function Graph() {
             (response) => {
                 const allNotes = response.data;
                 setNotes(allNotes)
+
             }
         )
         .catch(error => console.error(`Error: ${error}`))
         
     }, []);
-
+    console.log("crypto:" + notes)
     return(
         <>
             
