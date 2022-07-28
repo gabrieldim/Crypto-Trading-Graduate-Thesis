@@ -30,18 +30,17 @@ export default function Graph() {
         
     }, []);
 
-    console.log("crypto:" + notes)
-    console.log("crypto:" + symbol)
+    console.log(notes.data)
 
     return(
         <>
-            {/* <select className=""> */}
-                {/* {notes.map(note => {
-                        console.log("crypto:" + {note})
-                })} */}
+            <select>
+            <option selected value="BTC">BTC</option>
+                {symbol.map(s => (
+                    <option value={s}>{s}</option>
+                ))}                
+            </select>
 
-                
-            {/* </select> */}
         </>
     )
     
