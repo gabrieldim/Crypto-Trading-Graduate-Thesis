@@ -13,4 +13,7 @@ public interface CryptoHistoryGraphDataService {
 
     List<CryptoHistoryGraphData> getHistoricalCryptoData();
     List<CryptoHistoryGraphData> getAllGraphCryptoData();
+
+    List<String> getAllCryptoSymbolNames();
+
 }

@@ -47,4 +47,9 @@ public class CryptoHistoryGraphDataServiceImplementation implements CryptoHistor
     public List<CryptoHistoryGraphData> getAllGraphCryptoData() {
         return cryptoHistoryGraphDataRepository.findAll();
     }
+
+    @Override
+    public List<String> getAllCryptoSymbolNames() {
+        return cryptoHistoryGraphDataRepository.findDistinctBySymbol();
+    }
 }
