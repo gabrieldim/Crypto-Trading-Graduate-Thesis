@@ -17,7 +17,7 @@ export default function Graph() {
         .catch(error => console.error(`Error: ${error}`))
         
     }, []);
-    console.log("crypto:" + notes)
+    console.log("crypto:" + notes[0])
     return(
         <>
             

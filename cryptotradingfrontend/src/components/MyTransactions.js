@@ -5,7 +5,7 @@ import CryptoService from "../repository/cryptoTradingRepository"
 export default function MyTransactions(){
 
     const [notes, setNotes] = useState([]);
-
+    const [error, setErrors] = useState([]);
 
     useEffect( () => {
         CryptoService.loggedUserTransactions().then(
@@ -14,7 +14,9 @@ export default function MyTransactions(){
                 setNotes(allNotes)
             }
         )
-        .catch(error => console.error(`Error: ${error}`))
+        .catch(error => {
+            setErrors("Sorry, no transactions to show!");
+          });
         
     }, []);
 
@@ -48,6 +50,7 @@ export default function MyTransactions(){
                 </tbody>
             </table>
         </div>
+        <div style={{color:"red", marginLeft:"30%"}}><b>{error}</b></div>
         </div>
     )
 

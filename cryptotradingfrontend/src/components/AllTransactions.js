@@ -50,7 +50,7 @@ export default function AllTransactions(){
                 </tbody>
             </table>
         </div>
-        <div style={{color:"red", marginLeft:"400px"}}><b>{error}</b></div>
+        <div style={{color:"red", marginLeft:"30%"}}><b>{error}</b></div>
         </div>
     )
 
