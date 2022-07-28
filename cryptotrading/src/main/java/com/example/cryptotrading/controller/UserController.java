@@ -71,4 +71,9 @@ public class UserController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/availableResources")
+    public String getLoggedUserAvailableResources(){
+        return userService.getLoggedUserAvailableResource().toString();
+    }
+
 }

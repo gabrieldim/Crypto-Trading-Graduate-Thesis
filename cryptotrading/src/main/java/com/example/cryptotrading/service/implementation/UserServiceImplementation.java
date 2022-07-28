@@ -219,6 +219,14 @@ public class UserServiceImplementation implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public Double getLoggedUserAvailableResource() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUserUsername = auth.getPrincipal().toString();
+        User user = userRepository.findByUsername(loggedUserUsername);
+        return user.getAvailableResourcesInUSD();
+    }
+
     public Double getCurrencyRealTimePrice(String currencyName) throws JsonProcessingException, URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
         //https://pro.coinmarketcap.com/account
