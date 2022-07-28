@@ -4,3 +4,8 @@
 
 #### Tech stack: Spring Boot - backend, React - frontend.
 #### More detailed information coming soon..
+
+</br>
+
+### Student: Gabriel Dimitrievski, 181225, Software engineering and information systems
+### Mentor: Riste Stojanov Ph.D.
