@@ -4,6 +4,8 @@ import cryptoTradingRepository from "../repository/cryptoTradingRepository";
 
 export default function BuyCrypto() {
 
+const [error, setErrors] = useState([]);
+
   const [buyCryptoInfo, setBuyCryptoInfo] = useState({
     currencyName: "",
     amountToBuy: 0.0
@@ -17,7 +19,12 @@ export default function BuyCrypto() {
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(buyCryptoInfo.currencyName + " " + buyCryptoInfo.amountToBuy)
-    cryptoTradingRepository.buyCrypto(buyCryptoInfo.currencyName, buyCryptoInfo.amountToBuy);
+    setErrors([])
+    cryptoTradingRepository.buyCrypto(buyCryptoInfo.currencyName, buyCryptoInfo.amountToBuy)
+    .catch(error => {
+      setErrors("Something went wrong, the transaction is not completed: " + error.response.data.error)
+    });
+
 }
 
     return (
@@ -37,7 +44,7 @@ export default function BuyCrypto() {
                 <br/>
                 <Button type='submit' style={{margin:"3%"}}>Buy Crypto</Button>
             </form>
-
+          <div style={{color:"red", marginTop:"-60px", marginBottom:"45px", marginLeft:"400px"}}>{error}</div>
         </div>
       );
 }

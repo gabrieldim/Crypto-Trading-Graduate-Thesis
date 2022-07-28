@@ -7,6 +7,7 @@ export default function WithdrawMoney() {
 
     const [amount, setAmount] = useState(0.0);
     const [bytes, setBytes] = useState("");
+    const [error, setErrors] = useState([]);
 
     function handleChange(event) {
         setAmount(event.target.value);
@@ -18,11 +19,16 @@ export default function WithdrawMoney() {
       e.preventDefault();
       cryptoTradingRepository.generatePDF(amount).then(
         (response) => {
+            setErrors([])
             const returnedBytes = response.data;
             setBytes(returnedBytes)
+            generate();
         }
-      );
-      generate();
+      )
+      .catch(error => {
+        setErrors("- You don't have enough available resources to complete this action!" /*+ error.response.data.error*/)
+      });
+
   }
 
   function generate() {
@@ -47,6 +53,7 @@ export default function WithdrawMoney() {
                 <br/>
                 <Button type='submit' style={{margin:"3%", backgroundColor:"grey"}}>Withdraw Money</Button>
             </form>
+            <div style={{color:"red", marginTop:"-60px", marginBottom:"60px", marginLeft:"400px"}}>{error}</div>
         </div>
     )
 }

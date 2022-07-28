@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CryptoService from "../repository/cryptoTradingRepository"
 import '../style/style.css'
@@ -7,6 +7,8 @@ import '../index.css'
 const Register = (props) => {
 
     const navigate = useNavigate();
+
+    const [error, setErrors] = useState([]);
 
     const [formData, updateFormData] = React.useState({
         username: "",
@@ -26,11 +28,15 @@ const Register = (props) => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
+        setErrors([])
         CryptoService.register(formData.username, formData.password, formData.repeatPassword, formData.firstName, formData.lastName, formData.role).then(resp => {
             console.log(resp)
             // props.onLogin()
             navigate('/login');
         })
+        .catch(error => {
+            setErrors(error.response.data.error + " - Check the credentials, otherwise the username is already taken!")
+          });
 
     }
 
@@ -102,12 +108,14 @@ const Register = (props) => {
                         />
                     </div>
                     <button id="submit" type="submit" className="btn btn-primary space"><b>Submit</b></button>
+                    <div style={{color:"red"}}>{error}</div>
                 </form>
             </div>
-            <div>
+            <div style={{marginBottom:"30px"}}>
                 <hr></hr>
-               <b> Have account? </b> <a href='/login' style={{color:"lightBlue"}}><b>Sign in here</b></a>
+               <b> Have account? </b> <a href='/login' style={{color:"lightBlue", margin:"20px"}}><b>Sign in here</b></a>
             </div>
+            
         </div>
     )
 }

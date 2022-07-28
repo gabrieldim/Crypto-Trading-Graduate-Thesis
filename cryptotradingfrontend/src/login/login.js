@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import CryptoService from "../repository/cryptoTradingRepository"
 
 const Login = (props) => {
+
+    const [error, setErrors] = useState([]);
 
     const history = useNavigate();
     const [formData, updateFormData] = React.useState({
@@ -19,11 +21,14 @@ const Login = (props) => {
 
     const onFormSubmit = (e) => {
         e.preventDefault();
+        setErrors([])
         CryptoService.login(formData.username, formData.password).then(resp => {
             localStorage.setItem("JWT", resp.data);
             history("/home");
         })
-
+        .catch(error => {
+            setErrors("- Invalid User Credentials!")
+          });
     }
     
     localStorage.removeItem("JWT")
@@ -57,6 +62,7 @@ const Login = (props) => {
                         <button id="submit" type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
+                <div style={{color:"red", marginTop:"10px"}}>{error}</div>
             </div>
         </div>
     )

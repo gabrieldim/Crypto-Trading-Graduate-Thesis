@@ -5,6 +5,7 @@ import cryptoTradingRepository from "../repository/cryptoTradingRepository";
 
 export default function SellCrypto() {
 
+  const [error, setErrors] = useState([]);
 
   const [sellCryptoInfo, setSellCryptoInfo] = useState({
     currencyName: "",
@@ -19,7 +20,11 @@ export default function SellCrypto() {
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    cryptoTradingRepository.sellCrypto(sellCryptoInfo.currencyName, sellCryptoInfo.amountToSell);
+    setErrors([])
+    cryptoTradingRepository.sellCrypto(sellCryptoInfo.currencyName, sellCryptoInfo.amountToSell)
+    .catch(error => {
+      setErrors("- Something went wrong, the transaction is not completed: " + error.response.data.error)
+    });;
 }
 
 
@@ -39,6 +44,7 @@ export default function SellCrypto() {
                 <br/>
                 <Button type='submit' style={{margin:"3%"}} variant="danger">Sell Crypto</Button>
             </form>   
+            <div style={{color:"red", marginTop:"-60px", marginBottom:"60px", marginLeft:"400px"}}>{error}</div>
         </div>
       );
 }
