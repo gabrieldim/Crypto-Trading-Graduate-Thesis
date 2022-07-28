@@ -59,5 +59,8 @@ const cryptoTradingRepository = {
     allCryptoSymbols: () => {
       return axios.get("/api/cryptoSymbolName");
     },
+    getAvailableResources: () => {
+        return axios.get("/api/availableResources");
+      },
 }
 export default cryptoTradingRepository;

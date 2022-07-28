@@ -6,6 +6,8 @@ export default function MyCrypto(){
 
     const [notes, setNotes] = useState([]);
     const [user, setUser] = useState("");
+    const [availableResources, setAvailableResources] = useState("");
+
 
     useEffect( () => {
         CryptoService.userOwnedCrypto().then(
@@ -29,12 +31,23 @@ export default function MyCrypto(){
         
     }, []);
 
+    useEffect( () => {
+        CryptoService.getAvailableResources().then(
+            (response) => {
+                const amount = response.data;
+                setAvailableResources(amount)
+            }
+        )
+        .catch(error => console.error(`Error: ${error}`))
+        
+    }, []);
 
     return(
         <div>
             <NavBar/>
             <div style={{margin:"2%", fontSize:"18px"}}>
                 Current logged user - <b> {user} </b> <br/>
+                Users Available Resources (USD)- <b> {availableResources} $ </b> <br/>
                 Cryptocurrencies owned by the given user:
             </div>
 
