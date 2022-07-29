@@ -18,7 +18,6 @@ export default function AddMoneyInWallet() {
   
     return (
         <div>
-            <h4 style={{marginLeft:"3%"}}>Deposit Available Resources:</h4>
             <form style={{marginLeft:"3%"}} onSubmit={onFormSubmit} >
                 <label>
                   Amount(USD):

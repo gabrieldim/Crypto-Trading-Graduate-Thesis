@@ -2,6 +2,9 @@ import React from "react";
 import Graph from "./Graph";
 import CashChanges from "./CashChanges"
 import NavBar from "./NavBar";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function HomePage(){
 
@@ -9,15 +12,13 @@ export default function HomePage(){
         <>
             <NavBar/>
 
-
-            {/*TODO: */}
-            <Graph/>
-
-            {/* buy, sell, add available resources, show current owned data */}
-            <CashChanges/>
             
-
-
+            <Container>
+                <Row>
+                     <Col><Graph/></Col>
+                     <Col><CashChanges/></Col>
+                 </Row>
+            </Container>
 
         </>
     );

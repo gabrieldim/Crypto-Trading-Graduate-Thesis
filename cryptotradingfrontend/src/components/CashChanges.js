@@ -8,20 +8,20 @@ export default function CashChanges(){
 
     return(
         <>
-            <div style={{marginTop:"1%"}}>
-                <div style={{border:"2px solid black", marginLeft:"50%", marginRight:"2%"}}>
-                <h4 style={{marginLeft:"30%"}}>Make Transaction:</h4>
-                    <BuyCrypto/>
-                    <SellCrypto/>
-
-                </div>   
+            <div>
+                <div style={{marginTop:"1%"}}>
+                    <h4 style={{marginLeft:"30%"}}>Make Transaction:</h4>
+                        <BuyCrypto/>
+                        <SellCrypto/>
+ 
+                </div>
+                <div>
+                    <h4 style={{marginLeft:"30%"}}>Deposit Available Resources:</h4>
+                        <AddMoneyInWallet/>
+                    <h4 style={{marginLeft:"30%"}}>Withdraw Money:</h4>
+                        <WithdrawMoney/>
+                </div>
             </div>
-
-        <div style={{border:"2px solid black", marginLeft:"50%", marginRight:"2%"}}>
-            <AddMoneyInWallet/>
-            <WithdrawMoney/>
-        </div>
-        
         </>
     )
 

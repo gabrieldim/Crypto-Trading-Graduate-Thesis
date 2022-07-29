@@ -44,7 +44,6 @@ export default function WithdrawMoney() {
 
     return(
         <div>
-            <h4 style={{marginLeft:"3%"}}>Withdraw Money:</h4>
             <form style={{marginLeft:"3%"}} onSubmit={onFormSubmit} >
                 <label>
                   Amount(USD):
