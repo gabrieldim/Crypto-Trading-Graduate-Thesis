@@ -11,13 +11,38 @@ export default function Graph() {
 
     const [notes, setNotes] = useState([]);
     const [symbol, setSymbol] = useState([]);
+    const [selectedSymbol, setSelectedSymbol] = useState("BTC");
+
+    const [data, setData] = useState({
+        labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
+        datasets:[
+            {
+                label: "Crypto Name",
+                data : [23,20,30,42,51,82,31,59,61,93,12,18,23],
+                backgroundColor: 'yellow',
+                borderColor: 'green'
+            }
+        ]
+     });
+
 
     useEffect( () => {
-        CryptoService.allCrypto().then(
+        CryptoService.allCrypto("BTC").then(
             (response) => {
                 const allNotes = response.data;
                 setNotes(allNotes)
-
+                // console.log("TEST" + allNotes.map(c => c.price))
+                setData({
+                    labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
+                    datasets:[
+                        {
+                            label: "BTC",
+                            data : allNotes.map(c => c.price),
+                            backgroundColor: 'yellow',
+                            borderColor: 'green'
+                        }
+                    ]
+                 })
             }
         )
         .catch(error => console.error(`Error: ${error}`))
@@ -36,34 +61,53 @@ export default function Graph() {
         
     }, []);
 
-    console.log("test" + notes.data)
-
-
-    const [data, setData] = useState({
-        labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
-        datasets:[
-            {
-                label: "Crypto Name",
-                data : [23,20,30,42,51,82,31,59,61,93,12,18,23],
-                backgroundColor: 'yellow',
-                borderColor: 'green'
+    const handleChange = (event) => {
+        // console.log("test" + event.target.value)
+        setSelectedSymbol(event.target.value);
+        CryptoService.allCrypto(event.target.value).then(
+            (response) => {
+                const allNotes = response.data;
+                setNotes(allNotes)
+                // console.log("TEST" + allNotes.map(c => c.price))
+                setData({
+                    labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
+                    datasets:[
+                        {
+                            label: event.target.value,
+                            data : allNotes.map(c => c.price),
+                            backgroundColor: 'yellow',
+                            borderColor: 'green'
+                        }
+                    ]
+                 })
             }
-        ]
-     });
+        )
+        .catch(error => console.error(`Error: ${error}`))
+
+        
 
 
+      };
+    
+
+    // console.log("test" + notes.data)
+
+
+
+
+    //  console.log("selected symbol" + selectedSymbol)
 
     return(
         <>
         <div style={{margin:"2%"}}><b>Select Crypto:    </b> 
-            <select>
-            <option selected value="BTC">BTC</option>
+            <select onClick={handleChange}>
+            <option defaultValue="BTC">BTC</option>
                 {symbol.map(s => (
-                    <option value={s}>{s}</option>
+                    <option value={s} key={s} >{s}</option>
                 ))}                
             </select>
         </div>
-
+                {/* <div>test: {selectedSymbol}</div> */}
 
             <div style={{width:"600px", height:"600px"}}>
                 <Line data={data}></Line>

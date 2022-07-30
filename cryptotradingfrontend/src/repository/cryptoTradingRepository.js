@@ -18,8 +18,8 @@ const cryptoTradingRepository = {
             "role" : role
         });
     },
-    allCrypto: () => {
-      return axios.get("/api/crypto");
+    allCrypto: (cryptoSymbol) => {
+      return axios.get("/api/crypto", { params: { cryptoSymbol } });
     },
     allTransactions: () => {
         return axios.get("/api/transactions");
