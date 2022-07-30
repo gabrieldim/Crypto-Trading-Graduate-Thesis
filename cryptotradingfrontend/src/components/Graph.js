@@ -12,6 +12,9 @@ export default function Graph() {
     const [notes, setNotes] = useState([]);
     const [symbol, setSymbol] = useState([]);
     const [selectedSymbol, setSelectedSymbol] = useState("BTC");
+    
+    const [cryptoName, setCryptoName] = useState("");
+    const [marketCap, setMarketCap] = useState("");
 
     const [data, setData] = useState({
         labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
@@ -31,6 +34,8 @@ export default function Graph() {
             (response) => {
                 const allNotes = response.data;
                 setNotes(allNotes)
+                setMarketCap(allNotes[12].marketCap)
+                setCryptoName(allNotes[12].name)
                 // console.log("TEST" + allNotes.map(c => c.price))
                 setData({
                     labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
@@ -68,6 +73,8 @@ export default function Graph() {
             (response) => {
                 const allNotes = response.data;
                 setNotes(allNotes)
+                setMarketCap(allNotes[12].marketCap)
+                setCryptoName(allNotes[12].name)
                 // console.log("TEST" + allNotes.map(c => c.price))
                 setData({
                     labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
@@ -88,13 +95,8 @@ export default function Graph() {
 
 
       };
-    
 
     // console.log("test" + notes.data)
-
-
-
-
     //  console.log("selected symbol" + selectedSymbol)
 
     return(
@@ -111,6 +113,12 @@ export default function Graph() {
 
             <div style={{width:"600px", height:"600px"}}>
                 <Line data={data}></Line>
+            </div>
+            
+            <div style={{marginTop:"-200px"}}>
+               <h4> Cryptocurrency Name: <b> {cryptoName} </b></h4>
+               <h4> Cryptocurrency Symbol: <b> {selectedSymbol} </b></h4>
+               <h4> Market Cap: <b> {marketCap} </b></h4>
             </div>
         </>
     )
