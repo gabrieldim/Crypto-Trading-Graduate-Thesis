@@ -93,6 +93,8 @@ export default function Graph() {
 
       };
 
+    console.log("notes: " + notes)
+
     return(
         <>
         <div style={{margin:"2%"}}><b>Select Crypto:    </b> 

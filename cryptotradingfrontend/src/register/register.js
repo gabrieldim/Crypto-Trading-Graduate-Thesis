@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CryptoService from "../repository/cryptoTradingRepository"
 import '../style/style.css'
-import '../index.css'
 
 const Register = (props) => {
 
