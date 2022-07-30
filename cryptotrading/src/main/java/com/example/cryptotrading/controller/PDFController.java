@@ -27,6 +27,7 @@ public class PDFController {
     public void generatePDF(HttpServletResponse response, @RequestBody WithdrawCashDto withdrawCashDto)
             throws IOException, NotEnoughUserResourcesException {
         response.setContentType("application/pdf");
+        //response.setContentType("application/octet-stream;charset=UTF-8");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
 
