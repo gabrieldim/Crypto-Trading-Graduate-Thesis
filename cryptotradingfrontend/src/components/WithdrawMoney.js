@@ -6,7 +6,6 @@ export default function WithdrawMoney() {
 
 
     const [amount, setAmount] = useState(0.0);
-    const [bytes, setBytes] = useState("");
     const [error, setErrors] = useState([]);
 
     function handleChange(event) {
@@ -20,9 +19,7 @@ export default function WithdrawMoney() {
       cryptoTradingRepository.generatePDF(amount).then(
         (response) => {
             setErrors([])
-            const returnedBytes = response.data;
-            setBytes(returnedBytes)
-            generate();
+            generate(response);
         }
       )
       .catch(error => {
@@ -31,9 +28,9 @@ export default function WithdrawMoney() {
 
   }
 
-  function generate() {
-    console.log("generate: " + bytes)
-    const url = window.URL.createObjectURL(new Blob([bytes]));
+  function generate(generateBytes) {
+    console.log("generate: " + generateBytes)
+    const url = window.URL.createObjectURL(new Blob([generateBytes], {type:'application/pdf'}));
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', 'Invoice-Payment.pdf');
