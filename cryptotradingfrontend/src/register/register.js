@@ -31,7 +31,6 @@ const Register = (props) => {
         setErrors([])
         CryptoService.register(formData.username, formData.password, formData.repeatPassword, formData.firstName, formData.lastName, formData.role).then(resp => {
             console.log(resp)
-            // props.onLogin()
             navigate('/login');
         })
         .catch(error => {

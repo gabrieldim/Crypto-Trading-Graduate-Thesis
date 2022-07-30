@@ -36,7 +36,6 @@ export default function Graph() {
                 setNotes(allNotes)
                 setMarketCap(allNotes[12].marketCap)
                 setCryptoName(allNotes[12].name)
-                // console.log("TEST" + allNotes.map(c => c.price))
                 setData({
                     labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
                     datasets:[
@@ -67,7 +66,6 @@ export default function Graph() {
     }, []);
 
     const handleChange = (event) => {
-        // console.log("test" + event.target.value)
         setSelectedSymbol(event.target.value);
         CryptoService.allCrypto(event.target.value).then(
             (response) => {
@@ -75,7 +73,6 @@ export default function Graph() {
                 setNotes(allNotes)
                 setMarketCap(allNotes[12].marketCap)
                 setCryptoName(allNotes[12].name)
-                // console.log("TEST" + allNotes.map(c => c.price))
                 setData({
                     labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
                     datasets:[
@@ -96,9 +93,6 @@ export default function Graph() {
 
       };
 
-    // console.log("test" + notes.data)
-    //  console.log("selected symbol" + selectedSymbol)
-
     return(
         <>
         <div style={{margin:"2%"}}><b>Select Crypto:    </b> 
@@ -109,7 +103,6 @@ export default function Graph() {
                 ))}                
             </select>
         </div>
-                {/* <div>test: {selectedSymbol}</div> */}
 
             <div style={{width:"600px", height:"600px"}}>
                 <Line data={data}></Line>
