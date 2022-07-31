@@ -2,8 +2,6 @@ package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.config.filters.JWTAuthenticationFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;

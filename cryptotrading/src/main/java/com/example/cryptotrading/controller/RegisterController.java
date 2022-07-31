@@ -4,7 +4,6 @@ import com.example.cryptotrading.exceptions.InvalidUserCredentialsException;
 import com.example.cryptotrading.exceptions.InvalidUserPasswordsException;
 import com.example.cryptotrading.exceptions.UserAlreadyExsistsException;
 import com.example.cryptotrading.model.dto.RegisterUserDto;
-import com.example.cryptotrading.model.enumeration.Role;
 import com.example.cryptotrading.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
