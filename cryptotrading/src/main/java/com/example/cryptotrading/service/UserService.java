@@ -16,9 +16,9 @@ public interface UserService extends UserDetailsService {
 
     void addUSDMoneyInWallet(Double deposit);
 
-    void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException;
+    void buyCrypto(String currencyName, Double amountToBuy) throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException;
 
-    void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException;
+    void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException;
 
     void withdrawAmount(Integer amountToWithdraw) throws NotEnoughUserResourcesException;
 

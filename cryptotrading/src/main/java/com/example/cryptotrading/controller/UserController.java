@@ -1,5 +1,6 @@
 package com.example.cryptotrading.controller;
 
+import com.example.cryptotrading.exceptions.InvalidCryptocurrencySearchException;
 import com.example.cryptotrading.exceptions.NotEnoughAppResourcesException;
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
 import com.example.cryptotrading.model.CryptoInWallet;
@@ -41,14 +42,14 @@ public class UserController {
 
     @PostMapping("/buyCrypto")
     public void buyCrypto(@RequestBody BuyCryptoDto buyCryptoDto)
-            throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+            throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException {
         System.out.println("Crypto to buy: " + buyCryptoDto.getCurrencyName() + " - " + buyCryptoDto.getAmountToBuy());
         userService.buyCrypto(buyCryptoDto.getCurrencyName(), Double.valueOf(buyCryptoDto.getAmountToBuy()));
     }
 
     @PostMapping("/sellCrypto")
     public void sellCrypto(@RequestBody SellCryptoDto sellCryptoDto)
-            throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+            throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException {
         System.out.println("Crypto to sell: " + sellCryptoDto.getCurrencyName() + " - " + sellCryptoDto.getAmountToSell());
         userService.sellCrypto(sellCryptoDto.getCurrencyName(), sellCryptoDto.getAmountToSell());
     }

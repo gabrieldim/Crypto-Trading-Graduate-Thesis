@@ -98,7 +98,7 @@ public class UserServiceImplementation implements UserService {
      * @throws NotEnoughUserResourcesException
      */
     public void buyCrypto(String currencyName, Double amountToBuy)
-            throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+            throws NotEnoughAppResourcesException, NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException {
 
         //proveri dali aplikaciajta ima pari vo taa valuta
         AvailableAppCrypto availableAppCrypto = availableAppCryptoRepository.findByAppCurrencyHeldName(currencyName);
@@ -164,7 +164,7 @@ public class UserServiceImplementation implements UserService {
      * @throws NotEnoughUserResourcesException
      */
     public void sellCrypto(String currencyName, Double amountToSell)
-            throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException {
+            throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException {
         // zemi ja cenata po koja shto valutata se prodava
         Double currentCryptocurrencyPrice = getCurrencyRealTimePrice(currencyName);
 
@@ -172,6 +172,25 @@ public class UserServiceImplementation implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedUserUsername = auth.getPrincipal().toString();
         User user = userRepository.findByUsername(loggedUserUsername);
+
+        //proveri dali korisnikot ja poseduva taa valuta
+        boolean userHasTheCryptoThatWantsToSell = false;
+        for(int i=0; i<user.getCryptoInWallet().size(); i++){
+            String test = user.getCryptoInWallet().get(i).getCurrencyHeldName().toString();
+            if(user.getCryptoInWallet().get(i).getCurrencyHeldName().equals(currencyName)){
+                userHasTheCryptoThatWantsToSell = true;
+                if(amountToSell > user.getCryptoInWallet().get(i).getCurrencyHeldAmount()){
+                    throw new NotEnoughUserResourcesException("You don't have enough from this cryptocurrency to sell!");
+                }
+                Double cryptocurrencyHeldUpdatedAmount = user.getCryptoInWallet().get(i).getCurrencyHeldAmount() - amountToSell;
+                user.getCryptoInWallet().get(i).setCurrencyHeldAmount(cryptocurrencyHeldUpdatedAmount);
+                break;
+            }
+        }
+        if(!userHasTheCryptoThatWantsToSell){
+            throw new InvalidCryptocurrencySearchException("The user doesn't own any coins from this currency!");
+        }
+
         for(int i=0;i<user.getCryptoInWallet().size(); i++){
             if(user.getCryptoInWallet().get(i).getCurrencyHeldName().equals(currencyName)){
                 Double currentAvailableAmountCrypto = user.getCryptoInWallet().get(i).getCurrencyHeldAmount();
@@ -227,7 +246,7 @@ public class UserServiceImplementation implements UserService {
         return user.getAvailableResourcesInUSD();
     }
 
-    public Double getCurrencyRealTimePrice(String currencyName) throws JsonProcessingException, URISyntaxException {
+    public Double getCurrencyRealTimePrice(String currencyName) throws JsonProcessingException, URISyntaxException, InvalidCryptocurrencySearchException {
         RestTemplate restTemplate = new RestTemplate();
         //https://pro.coinmarketcap.com/account
 
@@ -251,6 +270,11 @@ public class UserServiceImplementation implements UserService {
                         .get(i).getQuote().getUsd().getPrice();
             }
         }
+
+        if(currentCryptocurrencyPrice == 0.0){
+            throw new InvalidCryptocurrencySearchException("The search cryptocurrency is not available!");
+        }
+
         return currentCryptocurrencyPrice;
     }
 
