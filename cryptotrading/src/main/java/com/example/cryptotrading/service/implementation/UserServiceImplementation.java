@@ -272,7 +272,7 @@ public class UserServiceImplementation implements UserService {
         }
 
         if(currentCryptocurrencyPrice == 0.0){
-            throw new InvalidCryptocurrencySearchException("The search cryptocurrency is not available!");
+            throw new InvalidCryptocurrencySearchException("The searched cryptocurrency is not available!");
         }
 
         return currentCryptocurrencyPrice;
