@@ -199,9 +199,6 @@ public class UserServiceImplementation implements UserService {
                     throw new NotEnoughUserResourcesException("You don't have that much crypto to sell!");
                 }
 
-                currentAvailableAmountCrypto = currentAvailableAmountCrypto - amountToSell;
-                user.getCryptoInWallet().get(i).setCurrencyHeldAmount(currentAvailableAmountCrypto);
-
                 // dodaj mu pari vo cena na dostapni resursi vo USD
                 user.setAvailableResourcesInUSD(user.getAvailableResourcesInUSD() + amountToSell);
 
