@@ -61,7 +61,7 @@ public class PDFGeneratorServiceImpl {
         fontPaidTo.setSize(13);
         Paragraph paidTo = new Paragraph("Paid to:",fontPaidTo);
         Paragraph paragraph6 = new Paragraph(user.getFirstName() + " " + user.getLastName() +
-                "\n Known as: \"" + user.getUsername() + "\n +389 78 783 294", fontParagraph);
+                "\n Known as: \"" + user.getUsername() + "\"\n +389 78 783 294", fontParagraph);
 
         paidTo.setAlignment(Paragraph.ALIGN_RIGHT);
         paragraph6.setAlignment(Paragraph.ALIGN_RIGHT);
