@@ -69,7 +69,7 @@ public class PDFGeneratorServiceImpl {
         space.setAlignment(Paragraph.ALIGN_LEFT);
 
         //text
-        Paragraph text = new Paragraph("By submitting this invoice, we confirm that requested amount of "  + amountToWithdraw + " USD has been paid to the user's account.\n" +
+        Paragraph text = new Paragraph("By submitting this invoice, we confirm that requested amount of "  + amountToWithdraw + " USD has been paid to the user's account: " + user.getCreditCardNumbers() +"\n" +
                 "\n" +
                 "According to our policy for the use of this service, if there are any irregularities, they will be accepted only in the next three working days, otherwise it is considered that the funds have successfully reached the user's account.\n" +
                 "\n" +
