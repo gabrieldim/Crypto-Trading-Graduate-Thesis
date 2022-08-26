@@ -23,7 +23,7 @@ public class RegisterController {
             throws UserAlreadyExsistsException, InvalidUserPasswordsException, InvalidUserCredentialsException {
         System.out.println("test");
         this.userService.register(registerUserDto.getUsername(), registerUserDto.getPassword(), registerUserDto.getRepeatPassword(),
-                registerUserDto.getFirstName(), registerUserDto.getLastName(), registerUserDto.getRole());
+                registerUserDto.getFirstName(), registerUserDto.getLastName(), registerUserDto.getRole(), registerUserDto.getCreditCardNumbers());
 
     }
 

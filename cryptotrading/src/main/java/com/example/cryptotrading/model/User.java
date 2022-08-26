@@ -49,6 +49,8 @@ public class User implements UserDetails {
 
     private boolean isEnabled = true;
 
+    private String creditCardNumbers;
+
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -64,6 +66,15 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+    }
+
+    public User(String username, String password, String firstName, String lastName, Role role, String creditCardNumbers) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.creditCardNumbers = creditCardNumbers;
     }
 
     @Override

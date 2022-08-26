@@ -52,7 +52,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User register(String username, String password, String repeatPassword, String firstName, String lastName, Role role)
+    public User register(String username, String password, String repeatPassword, String firstName, String lastName, Role role, String creditCardNumbers)
             throws InvalidUserCredentialsException, InvalidUserPasswordsException, UserAlreadyExsistsException {
 
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
@@ -66,7 +66,7 @@ public class UserServiceImplementation implements UserService {
         }
         String encodedPassword = passwordEncoder.encode(password);
 
-        User user = new User(username, encodedPassword, firstName, lastName, role);
+        User user = new User(username, encodedPassword, firstName, lastName, role, creditCardNumbers);
         return userRepository.save(user);
     }
 

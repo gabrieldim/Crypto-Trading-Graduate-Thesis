@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 @Service
 public interface UserService extends UserDetailsService {
 
-    User register(String username, String password, String repeatPassword, String firstName, String lastName, Role role) throws InvalidUserCredentialsException, InvalidUserPasswordsException, UserAlreadyExsistsException;
+    User register(String username, String password, String repeatPassword, String firstName, String lastName, Role role, String creditCardNumbers) throws InvalidUserCredentialsException, InvalidUserPasswordsException, UserAlreadyExsistsException;
 
     void addUSDMoneyInWallet(Double deposit);
 
