@@ -8,14 +8,15 @@ const cryptoTradingRepository = {
             "password": password
         });
     },
-    register: (username, password,repeatPassword,firstName,lastName,role) => {
+    register: (username, password,repeatPassword,firstName,lastName,role,creditCardNumbers) => {
         return axios.post("/register", {
             "username": username,
             "password": password,
             "repeatPassword" : repeatPassword,
             "firstName" : firstName,
             "lastName" : lastName,
-            "role" : role
+            "role" : role,
+            "creditCardNumbers" : creditCardNumbers
         });
     },
     allCrypto: (cryptoSymbol) => {

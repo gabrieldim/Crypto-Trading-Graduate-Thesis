@@ -15,7 +15,8 @@ const Register = (props) => {
         repeatPassword: "",
         firstName: "",
         lastName: "",
-        role: ""
+        role: "",
+        creditCardNumbers: ""
     })
 
     const handleChange = (e) => {
@@ -28,7 +29,7 @@ const Register = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         setErrors([])
-        CryptoService.register(formData.username, formData.password, formData.repeatPassword, formData.firstName, formData.lastName, formData.role).then(resp => {
+        CryptoService.register(formData.username, formData.password, formData.repeatPassword, formData.firstName, formData.lastName, formData.role, formData.creditCardNumbers).then(resp => {
             console.log(resp)
             navigate('/login');
         })
@@ -37,7 +38,7 @@ const Register = (props) => {
           });
 
     }
-
+    console.log(formData.creditCardNumbers)
     return (
         <div style={{marginLeft:"35%",marginTop:"1%"}}>
             <div className="col-md-5 center">
@@ -92,6 +93,18 @@ const Register = (props) => {
                                name="lastName"
                                placeholder="Enter lastname"
                                required
+                               onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group space">
+                        <label htmlFor="price"><b>Credit Card</b></label>
+                        <input type="text"
+                               className="form-control"
+                               name="creditCardNumbers"
+                               placeholder="Enter credit card data"
+                               required
+                               maxLength={16}
+                               minLength={16}
                                onChange={handleChange}
                         />
                     </div>
