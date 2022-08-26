@@ -12,6 +12,7 @@ import MyCrypto from "./components/MyCrypto";
 import MyTransactions from "./components/MyTransactions";
 import AllTransactions from "./components/AllTransactions";
 import PageNotFound from "./components/PageNotFound";
+import Balance from "./components/Balance";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route exact path='/myCrypto' element={<MyCrypto/>}/>
             <Route exact path='/myTransactions' element={<MyTransactions/>}/>
             <Route exact path='/allTransactions' element={<AllTransactions/>}/>
+            <Route exact path='/balance' element={<Balance/>}/>
             <Route exact path='*' element={<PageNotFound/>}/>
         </Routes>
     </BrowserRouter>

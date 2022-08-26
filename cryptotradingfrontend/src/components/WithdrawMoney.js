@@ -47,7 +47,7 @@ export default function WithdrawMoney() {
                  <input type="number" name="amount" onChange={handleChange}/>
                 </label>
                 <br/>
-                <Button type='submit' style={{margin:"3%", backgroundColor:"grey"}}>Withdraw Money</Button>
+                <Button type='submit' style={{margin:"2%", backgroundColor:"red"}}>Withdraw Money</Button>
             </form>
             <div style={{color:"red", marginTop:"-60px", marginBottom:"60px", marginLeft:"400px"}}>{error}</div>
         </div>

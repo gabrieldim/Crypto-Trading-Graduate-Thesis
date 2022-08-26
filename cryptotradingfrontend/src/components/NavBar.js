@@ -17,6 +17,9 @@ const NavBar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
+        <NavLink to='/balance'>
+           <b> Withdraw/Deposit </b>
+          </NavLink>
           <NavLink to='/myCrypto'>
            <b> My Cryptocurrencies </b>
           </NavLink>
@@ -26,7 +29,6 @@ const NavBar = () => {
           <NavLink to='/allTransactions'>
           <b> All Transactions </b>
           </NavLink>
-
         </NavMenu>
         <NavBtn>
           <NavBtnLink to='/login'>Log out</NavBtnLink>

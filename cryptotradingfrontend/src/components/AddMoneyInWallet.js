@@ -24,7 +24,7 @@ export default function AddMoneyInWallet() {
                  <input type="number" name="deposit" onChange={handleChange}/>
                 </label>
                 <br/>
-                <Button type='submit' variant="success" style={{margin:"3%"}}>Deposit Cash</Button>
+                <Button type='submit' variant="success" style={{margin:"2%"}}>Deposit Cash</Button>
             </form>
         </div>
       );
