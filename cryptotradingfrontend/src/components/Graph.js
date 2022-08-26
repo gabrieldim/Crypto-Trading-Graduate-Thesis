@@ -30,7 +30,7 @@ export default function Graph() {
 
 
     useEffect( () => {
-        setInterval(() => {
+        // setInterval(() => {
         CryptoService.allCrypto("BTC").then(
             (response) => {
                 const allNotes = response.data;
@@ -52,7 +52,7 @@ export default function Graph() {
         )
         .catch(error => console.error(`Error: ${error}`))
         console.log("the graph is updated!")
-    }, 300000)}, []); // on every 5 minutes make a api call to update the graph
+    }/*, 300000)}, []*/); // on every 5 minutes make a api call to update the graph
 
     useEffect( () => {
         CryptoService.allCryptoSymbols().then(
