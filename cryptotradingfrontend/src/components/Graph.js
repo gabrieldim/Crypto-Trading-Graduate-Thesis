@@ -101,6 +101,9 @@ export default function Graph() {
                     <option value={s} key={s} >{s}</option>
                 ))}                
             </select>
+            <p>
+                The results shown in the graph below are in <b>USD</b>.
+            </p>
         </div>
 
             <div style={{width:"600px", height:"600px"}}>
