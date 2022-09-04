@@ -2,7 +2,7 @@ package com.example.cryptotrading.controller;
 
 import com.example.cryptotrading.exceptions.InvalidUserCredentialsException;
 import com.example.cryptotrading.exceptions.InvalidUserPasswordsException;
-import com.example.cryptotrading.exceptions.UserAlreadyExsistsException;
+import com.example.cryptotrading.exceptions.UserAlreadyExistsException;
 import com.example.cryptotrading.model.dto.RegisterUserDto;
 import com.example.cryptotrading.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class RegisterController {
 
     @PostMapping
     public void register(@RequestBody RegisterUserDto registerUserDto)
-            throws UserAlreadyExsistsException, InvalidUserPasswordsException, InvalidUserCredentialsException {
+            throws UserAlreadyExistsException, InvalidUserPasswordsException, InvalidUserCredentialsException {
         System.out.println("test");
         this.userService.register(registerUserDto.getUsername(), registerUserDto.getPassword(), registerUserDto.getRepeatPassword(),
                 registerUserDto.getFirstName(), registerUserDto.getLastName(), registerUserDto.getRole(), registerUserDto.getCreditCardNumbers());

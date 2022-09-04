@@ -28,7 +28,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -53,7 +52,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User register(String username, String password, String repeatPassword, String firstName, String lastName, Role role, String creditCardNumbers)
-            throws InvalidUserCredentialsException, InvalidUserPasswordsException, UserAlreadyExsistsException {
+            throws InvalidUserCredentialsException, InvalidUserPasswordsException, UserAlreadyExistsException {
 
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             throw new InvalidUserCredentialsException("Please provide correct user details!");
@@ -62,7 +61,7 @@ public class UserServiceImplementation implements UserService {
             throw new InvalidUserPasswordsException("Please provide same passwords!");
         }
         if(this.userRepository.findByUsername(username) != null ){
-            throw new UserAlreadyExsistsException("User already exists!");
+            throw new UserAlreadyExistsException("User already exists!");
         }
         String encodedPassword = passwordEncoder.encode(password);
 
