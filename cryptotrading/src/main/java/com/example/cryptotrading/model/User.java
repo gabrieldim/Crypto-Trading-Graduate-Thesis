@@ -37,10 +37,6 @@ public class User implements UserDetails {
 
     private Double availableResourcesInUSD = 0d;
 
-    private String city;
-
-    private String address;
-
     private boolean isAccountNonExpired = true;
 
     private boolean isAccountNonLocked = true;
