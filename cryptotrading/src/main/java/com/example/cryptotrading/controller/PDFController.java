@@ -4,6 +4,7 @@ package com.example.cryptotrading.controller;
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
 import com.example.cryptotrading.model.dto.WithdrawCashDto;
 import com.example.cryptotrading.service.implementation.PDFGeneratorServiceImpl;
+import lombok.With;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +24,8 @@ public class PDFController {
         this.pdfGeneratorService = pdfGeneratorService;
     }
 
-    @PostMapping("/generatePDF")
-    public void generatePDF(HttpServletResponse response, @RequestBody WithdrawCashDto withdrawCashDto)
+    @GetMapping("/generatePDF")
+    public void generatePDF(HttpServletResponse response, @RequestParam Integer amount, @RequestParam String username)
             throws IOException, NotEnoughUserResourcesException {
         response.setContentType("application/pdf");
         //response.setContentType("application/octet-stream;charset=UTF-8");
@@ -35,9 +36,9 @@ public class PDFController {
         String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        System.out.println("Amount to withdraw: " + withdrawCashDto.getAmount());
+        System.out.println("Amount to withdraw: " +amount);
 
-        this.pdfGeneratorService.export(response, Integer.parseInt(withdrawCashDto.getAmount()));
+        this.pdfGeneratorService.export(response, amount,username);
     }
 
 

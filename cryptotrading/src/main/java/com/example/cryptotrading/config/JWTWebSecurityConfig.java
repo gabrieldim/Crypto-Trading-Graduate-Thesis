@@ -33,7 +33,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http)throws Exception{
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/home","/register","/api/login").permitAll()
+                .antMatchers("/","/home","/register","/api/login","/api/generatePDF").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

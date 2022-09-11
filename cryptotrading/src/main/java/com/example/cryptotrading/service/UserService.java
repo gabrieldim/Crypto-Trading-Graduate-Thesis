@@ -20,7 +20,7 @@ public interface UserService extends UserDetailsService {
 
     void sellCrypto(String currencyName, Double amountToSell) throws NotEnoughUserResourcesException, URISyntaxException, JsonProcessingException, InvalidCryptocurrencySearchException;
 
-    void withdrawAmount(Integer amountToWithdraw) throws NotEnoughUserResourcesException;
+    void withdrawAmount(Integer amountToWithdraw, String username) throws NotEnoughUserResourcesException;
 
     Double getLoggedUserAvailableResource();
 }

@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import cryptoTradingRepository from "../repository/cryptoTradingRepository";
-import Button from 'react-bootstrap/Button';
 
 export default function WithdrawMoney() {
 
 
     const [amount, setAmount] = useState(0.0);
     const [error, setErrors] = useState([]);
+    const [redirectURL, setRedirectURL] = useState("");
+
 
     function handleChange(event) {
         setAmount(event.target.value);
+        console.log("amount: " + event.target.value)
+        cryptoTradingRepository.getLoggedUser().then(
+          (response) => {
+              const loggedUser = response.data;
+              setRedirectURL(`http://localhost:8091/api/generatePDF?amount=${event.target.value}&username=${loggedUser}`)
+          }
+      )
     }
 
 
@@ -35,7 +43,7 @@ export default function WithdrawMoney() {
     link.href = url;
     link.setAttribute('download', 'Invoice-Payment.pdf');
     document.body.appendChild(link);
-    link.click();
+    link.click(); 
     }
 
 
@@ -44,10 +52,10 @@ export default function WithdrawMoney() {
             <form style={{marginLeft:"3%"}} onSubmit={onFormSubmit} >
                 <label>
                   Amount(USD):
-                 <input type="number" name="amount" onChange={handleChange}/>
+                 <input type="number" name="amount" style={{marginBottom:"8%"}} onChange={handleChange}/>
                 </label>
-                <br/>
-                <Button type='submit' style={{margin:"2%", backgroundColor:"red"}}>Withdraw Money</Button>
+                <br/>             
+                <a href={redirectURL}  className="button">Withdraw Money</a>
             </form>
             <div style={{color:"red", marginTop:"-60px", marginBottom:"60px", marginLeft:"400px"}}>{error}</div>
         </div>

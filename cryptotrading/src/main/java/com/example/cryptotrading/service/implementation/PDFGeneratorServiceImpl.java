@@ -26,11 +26,11 @@ public class PDFGeneratorServiceImpl {
         this.userService = userService;
     }
 
-    public void export(HttpServletResponse response, Integer amountToWithdraw)
+    public void export(HttpServletResponse response, Integer amountToWithdraw, String username)
             throws IOException, NotEnoughUserResourcesException {
 
         //ako nema tolku pari na available resources, odma frli exception
-        userService.withdrawAmount(amountToWithdraw);
+        userService.withdrawAmount(amountToWithdraw, username);
 
         Document document = new Document(PageSize.A4);
 
@@ -54,9 +54,9 @@ public class PDFGeneratorServiceImpl {
         paragraph1.setAlignment(Paragraph.ALIGN_LEFT);
 
         //paid to
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String loggedUserUsername = auth.getPrincipal().toString();
-        User user = userRepository.findByUsername(loggedUserUsername);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String loggedUserUsername = auth.getPrincipal().toString();
+        User user = userRepository.findByUsername(username);
         Font fontPaidTo = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         fontPaidTo.setSize(13);
         Paragraph paidTo = new Paragraph("Paid to:",fontPaidTo);

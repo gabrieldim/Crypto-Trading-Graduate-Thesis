@@ -31,27 +31,27 @@ export default function Graph() {
 
     useEffect( () => {
         // setInterval(() => {
-        CryptoService.allCrypto("BTC").then(
-            (response) => {
-                const allNotes = response.data;
-                setNotes(allNotes)
-                setMarketCap(allNotes[12].marketCap)
-                setCryptoName(allNotes[12].name)
-                setData({
-                    labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
-                    datasets:[
-                        {
-                            label: "BTC",
-                            data : allNotes.map(c => c.price),
-                            backgroundColor: 'yellow',
-                            borderColor: 'green'
-                        }
-                    ]
-                 })
-            }
-        )
-        .catch(error => console.error(`Error: ${error}`))
-        console.log("the graph is updated!")
+        // CryptoService.allCrypto("BTC").then(
+        //     (response) => {
+        //         const allNotes = response.data;
+        //         setNotes(allNotes)
+        //         setMarketCap(allNotes[12].marketCap)
+        //         setCryptoName(allNotes[12].name)
+        //         setData({
+        //             labels:["1h", "55min", "50min", "45min", "40min", "35min", "30min", "25min", "20min", "15min", "10min", "5min", "now"],
+        //             datasets:[
+        //                 {
+        //                     label: "BTC",
+        //                     data : allNotes.map(c => c.price),
+        //                     backgroundColor: 'yellow',
+        //                     borderColor: 'green'
+        //                 }
+        //             ]
+        //          })
+        //     }
+        // )
+        // .catch(error => console.error(`Error: ${error}`))
+        // console.log("the graph is updated!")
     }/*, 300000)}, []*/); // on every 5 minutes make a api call to update the graph
 
     useEffect( () => {

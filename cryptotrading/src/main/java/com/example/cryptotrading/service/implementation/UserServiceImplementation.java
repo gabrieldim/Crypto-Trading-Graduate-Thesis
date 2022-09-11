@@ -221,10 +221,10 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void withdrawAmount(Integer amountToWithdraw) throws NotEnoughUserResourcesException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String loggedUserUsername = auth.getPrincipal().toString();
-        User user = userRepository.findByUsername(loggedUserUsername);
+    public void withdrawAmount(Integer amountToWithdraw, String username) throws NotEnoughUserResourcesException {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String loggedUserUsername = auth.getPrincipal().toString();
+        User user = userRepository.findByUsername(username);
 
         if(user.getAvailableResourcesInUSD() < amountToWithdraw){
             throw new NotEnoughUserResourcesException("Sorry, you don't have" + amountToWithdraw + " available resources");
