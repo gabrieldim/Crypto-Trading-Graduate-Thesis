@@ -2,9 +2,7 @@ package com.example.cryptotrading.controller;
 
 
 import com.example.cryptotrading.exceptions.NotEnoughUserResourcesException;
-import com.example.cryptotrading.model.dto.WithdrawCashDto;
 import com.example.cryptotrading.service.implementation.PDFGeneratorServiceImpl;
-import lombok.With;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
