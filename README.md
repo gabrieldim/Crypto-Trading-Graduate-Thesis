@@ -12,8 +12,7 @@ The goal of this thesis is to provide a user interface through which users can b
 
 </br>
 
-<b> Tech stack: Spring Boot - backend, React - frontend. </b>  </br>
-<i> More detailed information coming soon.. </i>
+<b> Tech stack: Spring Boot - backend, React - frontend, PostgreSQL - database </b>  </br>
 
 </br>
 
